@@ -35,4 +35,8 @@ public interface ProductService {
 
 
     Long count();
+
+
+
+    List<ProductResponseDTO> getLimitProduct(int i);
 }

@@ -6,6 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>КоТоЛюД </title>
+  <meta name="description" content="Catman">
+
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -18,7 +22,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="source/files/favicon-io/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <title>КоТоЛюД</title>
+
 </head>
 
 <body>
@@ -70,164 +74,113 @@
         </div>
 
 
+
+
+        <!-- ============== ДИНАМИЧЕСКАЯ КАРУСЕЛЬ ТОВАРОВ ============== -->
         <div class="col-lg-8 col-md-12">
           <div class="row">
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-slide-to="true">
+            <!-- КАРУСЕЛЬ -->
+            <div id="carouselProducts"
+                 class="carousel slide"
+                 data-bs-ride="carousel"
+                 data-bs-interval="5000"
+                 data-bs-pause="hover"
+                 data-bs-wrap="true">
+
+              <!-- ИНДИКАТОРЫ (точки) -->
               <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                  aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                  aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                  aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                  aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                  aria-label="Slide 5"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
-                  aria-label="Slide 6"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"
-                  aria-label="Slide 7"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7"
-                  aria-label="Slide 8"></button>
+                <button th:each="product, iter : ${carusel}"
+                        type="button"
+                        data-bs-target="#carouselProducts"
+                        th:data-bs-slide-to="${iter.index}"
+                        th:class="${iter.index == 0} ? 'active' : ''"
+                        th:aria-label="'Slide ' + ${iter.index + 1}"></button>
               </div>
+
+              <!-- СЛАЙДЫ (Содержимое) -->
               <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div th:each="product, iter : ${carusel}"
+                     th:class="${'carousel-item ' + (iter.index == 0 ? 'active' : '')}">
                   <div class="d-block w-100">
                     <div class="row">
+                      <!-- Изображение -->
                       <div class="col-lg-6 col-md-6">
-                        <img src="source/images/shopping (3).webp" class="w-100" alt="...">
+                        <img th:if="${product.imageUrl}"
+                             th:src="${product.imageUrl}"
+                             class="w-100"
+                             th:alt="${product.name}">
+                        <img th:unless="${product.imageUrl}"
+                             src="source/images/shopping (3).webp"
+                             class="w-100"
+                             alt="Изображение товара">
                       </div>
+
+                      <!-- Текст и информация -->
                       <div class="col-lg-6 col-md-6 slide-text">
-                        <p class="">Найпопулярніший товар - корм та ласощі для котів. Для котів правильно збалансоване
-                          харчування дуже важливе, щоб зберегти здоров'я та активність, для довгого повноцінного життя.
-                          У магазині представлені найкращі товари: корми та ласощі преміум та суперпреміум-класу, що не
-                          містять хімічних добавок, ароматизаторів, підсилювачів смаку та барвників.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-block w-100">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6">
-                        <img src="source/images/shopping (2).webp" class="w-100" alt="...">
-                      </div>
-                      <div class="col-lg-6 col-md-6 slide-text">
-                        <p class="">До складу корму входить натуральне м'ясо, риба, риб'ячий і курячий жир, злаки та рослинні
-                                добавки, що збагачують раціон вихованця вітамінами. У різних лінійках корму для котів ви
-                                побачите у складі яблука, ягоди, моркву, трави, гарбуз, овес та інші вітамінні добавки.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-block w-100">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 slide-text">
-                        <img src="source/images/shopping (1).webp" class="w-100" alt="...">
-                      </div>
-                      <div class="col-lg-6 col-md-6">
-                        <p class="">Представлені спеціальні лінійки кормів для кошенят, молодих та зрілих котів, для тварин у
-                                віці. Окремо потрібно виділити такий важливий товар для котів, як лікувальні корми.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-block w-100">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6">
-                        <img src="source/images/shopping (4).webp" class="w-100" alt="...">
-                      </div>
-                      <div class="col-lg-6 col-md-6 slide-text">
-                        <p class="">Широкий вибір ветеринарних товарів для тварин різного віку дозволить з мінімальними
-                                зусиллями попередити хворобу або вилікувати кота. Перед покупкою обов'язково
-                                проконсультуйтеся із ветлікарем.</p>
+                        <!-- Название -->
+                        <h3 th:text="${product.name}">Название товара</h3>
+
+                        <!-- Описание -->
+                        <p th:text="${product.description}">
+                          Описание товара
+                        </p>
+
+                        <!-- Кнопка купить -->
+                        <a th:href="${product.urlProduct}"
+                           target="_blank"
+                           class="btn btn-primary">
+                          Купить
+                        </a>
+
+                        <!-- Ссылка на подробнее -->
+                        <a th:href="@{/product/{id}(id=${product.id})}"
+                           class="btn btn-outline-primary ms-2">
+                          Подробнее
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="carousel-item">
-                <div class="d-block w-100">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 slide-text">
-                      <img src="source/images/shopping.webp" class="w-100" alt="...">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                      <p class="">Вибір туалету та гігієнічного наповнювача – справа серйозна. Кіт може виявитися
-                                вибагливим як у виборі лотка, так і наповнювача. У нас ви знайдете десятки товарів:
-                                відкритих та закритих лотків, туалетів із сіткою різних розмірів, а також деревний,
-                                бентонітовий та силікогелеві наповнювачі.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="d-block w-100">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 slide-text">
-                      <img src="source/images/Без названия.webp" class="w-100" alt="...">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                      <p class="">Улюбленцю обов'язково потрібно відпочивати, відновлювати сили, для цього ми пропонуємо
-                                різноманітні лежанки та будиночки для котів. Ці товари в MasterZoo відрізняються високою
-                                якістю, великим вибором і широким спектром цін.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="d-block w-100">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 slide-text">
-                      <img src="source/images/photo_2025-10-12_14-24-05.jpg" class="w-100" alt="...">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                      <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At molestias suscipit fugit
-                        ipsa, recusandae voluptatem eos, minima temporibus!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="d-block w-100">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 slide-text">
-                      <img src="source/images/photo_2025-10-12_14-24-05.jpg" class="w-100" alt="...">
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                      <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At molestias suscipit fugit
-                        ipsa, recusandae voluptatem eos, minima temporibus!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
+
+              <!-- КНОПКИ НАВИГАЦИИ (Стрелки) -->
+              <button class="carousel-control-prev"
+                      type="button"
+                      data-bs-target="#carouselProducts"
+                      data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
+
+              <button class="carousel-control-next"
+                      type="button"
+                      data-bs-target="#carouselProducts"
+                      data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
 
-
+            <!-- КНОПКА "Смотреть еще" -->
             <div class="col-lg12 col-md-12 text-center mt-4">
-              <button type="button" class="btn btn-outline-primary btn-lg my-4">See More</button>
-
+              <a href="/product">
+                <button type="button" class="btn btn-outline-primary btn-lg my-4">
+                  See More
+                </button>
+              </a>
             </div>
+
+            <!-- СЕКЦИЯ ПОМОЩИ -->
             <div class="col-lg12 col-md-12 text-center mt-4">
               <p>Мы можем вам помочь?</p>
             </div>
-            <div class="col-lg12 col-md-12 text-center">
-              <img class="call-anim" style="width: 40px; " src="source/files/photo_2025-10-12_14-22-49.jpg" alt="...">
 
+            <div class="col-lg12 col-md-12 text-center">
+              <img class="call-anim"
+                   style="width: 40px;"
+                   src="source/files/photo_2025-10-12_14-22-49.jpg"
+                   alt="Помощь">
             </div>
           </div>
         </div>
@@ -296,5 +249,6 @@
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 </body>
+
 
 </html>

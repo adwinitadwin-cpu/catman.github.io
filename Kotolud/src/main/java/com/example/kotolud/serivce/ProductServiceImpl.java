@@ -155,4 +155,14 @@ public class ProductServiceImpl implements ProductService {
     public Long count() {
        return productRepository.count();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductResponseDTO> getLimitProduct(int limit) {
+        return productRepository.findAll()  // ✅ Получаем все продукты
+                .stream()
+                .limit(limit)               // ✅ Ограничиваем количество
+                .map(productMapper::toResponseDTO)  // ✅ Преобразуем в DTO
+                .toList();
+    }
 }
