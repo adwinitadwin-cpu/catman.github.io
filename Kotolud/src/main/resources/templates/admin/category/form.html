@@ -1,0 +1,54 @@
+<!-- ============== admin/category/form.html ============== -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${isEdit} ? 'Редактировать категорию' : 'Создать категорию'"></title>
+</head>
+<body>
+
+<h1 th:text="${isEdit} ? 'Редактировать категорию' : 'Создать новую категорию'"></h1>
+
+<!-- Кнопка назад -->
+<a th:href="@{/admin-category}">
+    <button>Назад</button>
+</a>
+
+<!-- Форма -->
+<form th:action="${isEdit} ? @{/admin-category/update/{id}(id=${category.id})} : @{/admin-category/save}"
+      th:object="${category}" method="post">
+
+    <!-- Сообщения об ошибках валидации -->
+    <div th:if="${#fields.hasErrors('*')}" style="color: red; border: 1px solid red; padding: 10px;">
+        <p>Ошибки в форме:</p>
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err.defaultMessage}"></li>
+        </ul>
+    </div>
+
+    <!-- Поле: Название -->
+    <div>
+        <label for="name">Название:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Введите название">
+        <span th:if="${#fields.hasErrors('name')}" style="color: red;" th:errors="*{name}"></span>
+    </div>
+
+    <!-- Поле: Описание -->
+    <div>
+        <label for="description">Описание:</label>
+        <textarea id="description" th:field="*{description}" placeholder="Введите описание" rows="5"></textarea>
+        <span th:if="${#fields.hasErrors('description')}" style="color: red;" th:errors="*{description}"></span>
+    </div>
+
+    <!-- Кнопки -->
+    <div>
+        <button type="submit" th:text="${isEdit} ? 'Обновить' : 'Создать'"></button>
+        <a th:href="@{/admin-category}">
+            <button type="button">Отмена</button>
+        </a>
+    </div>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- ============== admin/category/list.html ============== -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории</title>
+</head>
+<body>
+
+<h1>Список категорий</h1>
+
+<!-- Сообщение об успехе -->
+<div th:if="${success}">
+    <p style="color: green;">[[${success}]]</p>
+</div>
+
+<!-- Сообщение об ошибке -->
+<div th:if="${error}">
+    <p style="color: red;">[[${error}]]</p>
+</div>
+
+<!-- Кнопка добавления новой категории -->
+<div>
+    <a th:href="@{/admin-category/form}">
+        <button>Добавить категорию</button>
+    </a>
+</div>
+
+<!-- Таблица категорий -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Создано</th>
+        <th>Обновлено</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categoryList}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.name}"></td>
+        <td th:text="${category.description}"></td>
+        <td th:text="${#temporals.format(category.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+        <td th:text="${#temporals.format(category.updatedAt, 'dd.MM.yyyy HH:mm')}"></td>
+        <td>
+            <a th:href="@{/admin-category/edit/{id}(id=${category.id})}">
+                <button>Редактировать</button>
+            </a>
+            <form th:action="@{/admin-category/delete/{id}(id=${category.id})}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Вы уверены?')">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Если список пуст -->
+<div th:if="${#lists.isEmpty(categoryList)}">
+    <p>Категорий не найдено. <a th:href="@{/admin-category/form}">Создать категорию</a></p>
+</div>
+
+</body>
+</html>

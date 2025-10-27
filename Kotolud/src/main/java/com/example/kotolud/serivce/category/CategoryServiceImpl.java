@@ -41,6 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * Обновить категорию
      */
+    @Override
     public CategoryResponseDTO update(Long id, CreateCategoryDTO updateCategoryDTO) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Категория с ID " + id + " не найдена"));
