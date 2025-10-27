@@ -20,7 +20,15 @@ public class Product {
 
 
     private String name;
+
     private String description;
+
+    @Column(length = 1000)
+    private String imageUrl;
+
+    @Column(length = 1000)
+    private String imageId;
+
     private String urlProduct;
 
 
