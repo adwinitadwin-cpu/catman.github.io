@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <title th:text="${product.name} + ' - КоТоЛюД'">Товар - КоТоЛюД</title>
+    <meta name="description" th:content="${product.description}">
+</head>
+
+<body>
+<!-- НАВИГАЦИЯ -->
+<header>
+    <nav class="navbar navbar-expand-lg bg-orange">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="/source/images/images.webp" alt="КоТоЛюД"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">КоТоЛюД</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/product">Магазин</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <img style="width: 35px; margin-inline: 1em;"
+                             src="/source/files/photo_2025-10-12_14-22-17.jpg" alt="Профиль">
+                        <a class="nav-link active" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <img style="width: 25px; margin-inline: 1em;"
+                             src="/source/files/photo_2025-10-12_14-22-40.jpg" alt="Корзина">
+                        <a class="nav-link active" href="#"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
+<section>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-lg-1"></div>
+
+            <!-- ОСНОВНАЯ ЧАСТЬ ТОВАРА -->
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <!-- ХЛЕБНЫЕ КРОШКИ -->
+                    <div class="col-lg-12 mb-4">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                                <li class="breadcrumb-item"><a href="/product">Магазин</a></li>
+                                <li class="breadcrumb-item active" th:text="${product.name}">Товар</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ И ИНФОРМАЦИЯ -->
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <!-- Основное изображение -->
+                        <div class="mb-3">
+                            <img th:if="${product.imageUrl}"
+                                 th:src="${product.imageUrl}"
+                                 id="mainImage"
+                                 class="img-fluid rounded"
+                                 style="max-height: 500px; object-fit: cover;"
+                                 th:alt="${product.name}">
+                            <img th:unless="${product.imageUrl}"
+                                 src="/source/images/shopping (12).webp"
+                                 id="mainImage"
+                                 class="img-fluid rounded"
+                                 style="max-height: 500px; object-fit: cover;"
+                                 alt="Изображение товара">
+                        </div>
+                    </div>
+
+                    <!-- ИНФОРМАЦИЯ О ТОВАРЕ -->
+                    <div class="col-lg-6 col-md-12">
+                        <!-- Название -->
+                        <h1 th:text="${product.name}" class="mb-3">Название товара</h1>
+
+                        <!-- ID категории (если нужно) -->
+                        <div th:if="${product.categoryId}" class="mb-2">
+                            <span class="badge bg-primary" th:text="'Категория ID: ' + ${product.categoryId}"></span>
+                        </div>
+
+                        <!-- Описание -->
+                        <div class="mb-4">
+                            <h5>Описание:</h5>
+                            <p th:text="${product.description}" class="text-muted">
+                                Описание товара
+                            </p>
+                        </div>
+
+                        <!-- Даты -->
+                        <div class="mb-4">
+                            <small class="text-muted">
+                                Создано: <span th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy HH:mm')}">дата</span>
+                            </small>
+                            <br>
+                            <small class="text-muted">
+                                Обновлено: <span th:text="${#temporals.format(product.updatedAt, 'dd.MM.yyyy HH:mm')}">дата</span>
+                            </small>
+                        </div>
+
+                        <!-- КНОПКИ ДЕЙСТВИЙ -->
+                        <div class="d-grid gap-2 mb-4">
+                            <!-- Купить -->
+                            <a th:href="${product.urlProduct}"
+                               target="_blank"
+                               class="btn btn-primary btn-lg">
+                                🛒 Купить
+                            </a>
+
+                            <!-- Поделиться в соцсетях -->
+                            <div class="d-flex gap-2 mt-3">
+                                <a href="#" class="btn btn-outline-primary flex-grow-1">
+                                    📱 Поделиться
+                                </a>
+                                <a href="/product" class="btn btn-outline-secondary flex-grow-1">
+                                    ← Назад к каталогу
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- ИНФОРМАЦИЯ О ТОВАРЕ -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Информация о товаре</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <strong>ID:</strong> <span th:text="${product.id}">ID</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <strong>Название:</strong> <span th:text="${product.name}">Название</span>
+                                    </li>
+                                    <li th:if="${product.categoryId}" class="mb-2">
+                                        <strong>Категория:</strong> <span th:text="${product.categoryId}">Категория</span>
+                                    </li>
+                                    <li th:if="${product.urlProduct}" class="mb-2">
+                                        <strong>Ссылка:</strong>
+                                        <a th:href="${product.urlProduct}"
+                                           target="_blank"
+                                           class="text-truncate d-block">
+                                            <span th:text="${#strings.abbreviate(product.urlProduct, 50)}">Ссылка</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ПОЛНОЕ ОПИСАНИЕ -->
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Подробное описание</h5>
+                                <p th:text="${product.description}" class="card-text">
+                                    Полное описание товара
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- СЕКЦИЯ ПОМОЩИ -->
+                <div class="row mt-5">
+                    <div class="col-lg-12 text-center">
+                        <p>Мы можем вам помочь?</p>
+                        <img class="call-anim"
+                             style="width: 40px;"
+                             src="/source/files/photo_2025-10-12_14-22-49.jpg"
+                             alt="Помощь">
+                    </div>
+                </div>
+            </div>
+
+            <!-- БОКОВАЯ ПАНЕЛЬ -->
+            <div class="col-lg-3 col-md-12">
+                <div class="row px-2">
+                    <!-- РЕКОМЕНДОВАННЫЕ ТОВАРЫ -->
+                    <div class="col-lg-12 sidebar my-4">
+                        <h5>Рекомендуемые товары</h5>
+                        <p>Посетите наш <a href="/product">каталог</a> для просмотра других товаров.</p>
+                    </div>
+
+                    <!-- ИНФОРМАЦИЯ О МАГАЗИНЕ -->
+                    <div class="col-lg-12 sidebar my-4">
+                        <h5>О магазине КоТоЛюД</h5>
+                        <p>Найпопулярніший товар - корм та ласощі для котів. Для котів правильно збалансоване
+                            харчування дуже важливе, щоб зберегти здоров'я та активність, для довгого повноцінного
+                            життя. <a href="#">Узнать больше>>></a></p>
+                    </div>
+
+                    <!-- КОНТАКТЫ -->
+                    <div class="col-lg-12 sidebar my-4">
+                        <h5>Контакты</h5>
+                        <p>Email: info@kotolud.com<br>
+                            Телефон: +380 XX XXX XX XX<br>
+                            <a href="#">Связаться с нами</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="mt-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 footer-text text-center">
+                <p>All Rights Reserved 2025</p>
+            </div>
+            <div class="col-lg-4 col-md-12 footer-text text-center">
+                <p>Contacts<br>Jobs<br>Our Team</p>
+            </div>
+            <div class="col-lg-4 col-md-12 media-links">
+                <img style="width: 40px; margin-inline: 1em;"
+                     src="/source/files/photo_2025-10-12_14-22-17.jpg" alt="Facebook">
+                <img style="width: 40px; margin-inline: 1em;"
+                     src="/source/files/photo_2025-10-12_14-22-40.jpg" alt="Instagram">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
