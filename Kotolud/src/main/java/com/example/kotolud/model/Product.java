@@ -23,6 +23,7 @@ public class Product {
 
     private String description;
 
+
     @Column(length = 1000)
     private String imageUrl;
 
