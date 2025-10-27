@@ -1,21 +1,18 @@
 package com.example.kotolud.model;
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
-public class Product {
+@Builder
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,17 +21,10 @@ public class Product {
 
     private String description;
 
-    @Column(length = 1000)
-    private String imageUrl;
-
-    @Column(length = 1000)
-    private String imageId;
-
-    private String urlProduct;
-
-    // Одному продукту может быть несколько категорий
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Category> categories = new ArrayList<>();
+    // Связь ManyToOne - много категорий на один продукт
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = true)  // nullable = true
+    private Product product;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
