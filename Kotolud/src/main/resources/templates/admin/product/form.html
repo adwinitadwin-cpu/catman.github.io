@@ -1,0 +1,73 @@
+<!-- ============== admin/product/form.html ============== -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${isEdit} ? 'Редактировать продукт' : 'Создать продукт'"></title>
+</head>
+<body>
+
+<h1 th:text="${isEdit} ? 'Редактировать продукт' : 'Создать новый продукт'"></h1>
+
+<!-- Кнопка назад -->
+<a th:href="@{/admin-product}">
+    <button>Назад</button>
+</a>
+
+<!-- Форма -->
+<form th:action="${isEdit} ? @{/admin-product/update/{id}(id=${product.id})} : @{/admin-product/save}"
+      th:object="${product}" method="post">
+
+    <!-- Сообщения об ошибках валидации -->
+    <div th:if="${#fields.hasErrors('*')}" style="color: red; border: 1px solid red; padding: 10px;">
+        <p>Ошибки в форме:</p>
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err.defaultMessage}"></li>
+        </ul>
+    </div>
+
+    <!-- Поле: Название -->
+    <div>
+        <label for="name">Название продукта:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Введите название">
+        <span th:if="${#fields.hasErrors('name')}" style="color: red;" th:errors="*{name}"></span>
+    </div>
+
+    <!-- Поле: Категория -->
+    <div>
+        <label for="categoryId">Категория:</label>
+        <select id="categoryId" th:field="*{categoryId}">
+            <option value="">-- Выберите категорию --</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat.id}"
+                    th:text="${cat.name}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('categoryId')}" style="color: red;" th:errors="*{categoryId}"></span>
+    </div>
+
+    <!-- Поле: Описание -->
+    <div>
+        <label for="description">Описание:</label>
+        <textarea id="description" th:field="*{description}" placeholder="Введите описание продукта" rows="5"></textarea>
+        <span th:if="${#fields.hasErrors('description')}" style="color: red;" th:errors="*{description}"></span>
+    </div>
+
+    <!-- Поле: URL продукта -->
+    <div>
+        <label for="urlProduct">URL продукта:</label>
+        <input type="text" id="urlProduct" th:field="*{urlProduct}" placeholder="https://example.com/product">
+        <span th:if="${#fields.hasErrors('urlProduct')}" style="color: red;" th:errors="*{urlProduct}"></span>
+    </div>
+
+    <!-- Кнопки -->
+    <div>
+        <button type="submit" th:text="${isEdit} ? 'Обновить' : 'Создать'"></button>
+        <a th:href="@{/admin-product}">
+            <button type="button">Отмена</button>
+        </a>
+    </div>
+
+</form>
+
+</body>
+</html>

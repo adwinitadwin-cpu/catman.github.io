@@ -52,6 +52,11 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.toResponseDTO(category);
     }
 
+    @Override
+    public Long count() {
+        return categoryRepository.count();
+    }
+
     /**
      * Удалить категорию
      */

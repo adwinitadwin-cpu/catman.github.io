@@ -32,7 +32,6 @@ public class Product {
 
     private String urlProduct;
 
-    // Одному продукту может быть несколько категорий
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Category> categories = new ArrayList<>();
 

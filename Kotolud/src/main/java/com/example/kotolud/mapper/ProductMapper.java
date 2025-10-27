@@ -2,10 +2,11 @@ package com.example.kotolud.mapper;
 
 import com.example.kotolud.dto.product.CreateProductDTO;
 import com.example.kotolud.dto.product.ProductResponseDTO;
-import org.springframework.stereotype.Component;
-
+import com.example.kotolud.dto.product.UpdateProductDTO;
 import com.example.kotolud.model.Product;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 
 @Component
 public class ProductMapper {
@@ -22,6 +23,7 @@ public class ProductMapper {
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .urlProduct(dto.getUrlProduct())
+                .categories(new ArrayList<>())
                 .build();
     }
 
@@ -33,6 +35,12 @@ public class ProductMapper {
             return null;
         }
 
+        // Получаем ID первой категории если она есть
+        Long categoryId = null;
+        if (product.getCategories() != null && !product.getCategories().isEmpty()) {
+            categoryId = product.getCategories().get(0).getId();
+        }
+
         return ProductResponseDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -40,6 +48,7 @@ public class ProductMapper {
                 .imageUrl(product.getImageUrl())
                 .imageId(product.getImageId())
                 .urlProduct(product.getUrlProduct())
+                .categoryId(categoryId)  // ✅ Добавляем categoryId
                 .createdAt(product.getCreatedAt())
                 .updatedAt(product.getUpdatedAt())
                 .build();
@@ -57,6 +66,11 @@ public class ProductMapper {
         product.setDescription(dto.getDescription());
         product.setUrlProduct(dto.getUrlProduct());
 
+        if (product.getCategories() == null) {
+            product.setCategories(new ArrayList<>());
+        }
+
         return product;
     }
+
 }

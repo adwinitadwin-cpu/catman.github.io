@@ -1,3 +1,4 @@
+// ============== ProductResponseDTO.java ==============
 package com.example.kotolud.dto.product;
 
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +23,7 @@ public class ProductResponseDTO {
     private String imageUrl;
     private String imageId;
     private String urlProduct;
+    private Long categoryId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

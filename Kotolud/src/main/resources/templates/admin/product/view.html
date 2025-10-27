@@ -1,0 +1,146 @@
+<!-- ============== admin/product/view.html ============== -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр продукта</title>
+</head>
+<body>
+
+<h1>Просмотр продукта</h1>
+
+<!-- Сообщения об успехе/ошибке -->
+<div th:if="${success}">
+    <p style="color: green;">[[${success}]]</p>
+</div>
+
+<div th:if="${error}">
+    <p style="color: red;">[[${error}]]</p>
+</div>
+
+<!-- Кнопки навигации -->
+<div>
+    <a th:href="@{/admin-product}">
+        <button>Назад к списку</button>
+    </a>
+    <a th:href="@{/admin-product/edit/{id}(id=${product.id})}">
+        <button>Редактировать</button>
+    </a>
+</div>
+
+<!-- Информация о продукте -->
+<div>
+    <h2 th:text="${product.name}"></h2>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <td th:text="${product.id}"></td>
+        </tr>
+
+        <tr>
+            <th>Название</th>
+            <td th:text="${product.name}"></td>
+        </tr>
+
+        <tr>
+            <th>Описание</th>
+            <td th:text="${product.description}"></td>
+        </tr>
+
+        <tr>
+            <th>URL изображения</th>
+            <td>
+                <div th:if="${product.imageUrl}">
+                    <img th:src="${product.imageUrl}" alt="Изображение продукта" width="200">
+                    <br/>
+                    <a th:href="${product.imageUrl}" target="_blank" th:text="${product.imageUrl}"></a>
+                </div>
+                <div th:unless="${product.imageUrl}">
+                    <p>Изображение не загружено</p>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>ID изображения</th>
+            <td th:text="${product.imageId}"></td>
+        </tr>
+
+        <tr>
+            <th>URL продукта</th>
+            <td>
+                <a th:href="${product.urlProduct}" target="_blank" th:text="${product.urlProduct}"></a>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Создано</th>
+            <td th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy HH:mm:ss')}"></td>
+        </tr>
+
+        <tr>
+            <th>Обновлено</th>
+            <td th:text="${#temporals.format(product.updatedAt, 'dd.MM.yyyy HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</div>
+
+<!-- ============== ЗАГРУЗКА ИЗОБРАЖЕНИЯ ============== -->
+<div style="margin-top: 30px; border: 1px solid #ccc; padding: 15px;">
+    <h3>Загрузить или изменить изображение</h3>
+
+    <form th:action="@{/admin-product/upload-image/{id}(id=${product.id})}"
+          method="post"
+          enctype="multipart/form-data">
+
+        <!-- Поле выбора файла -->
+        <div>
+            <label for="file">Выберите изображение:</label>
+            <input type="file"
+                   id="file"
+                   name="file"
+                   accept="image/*,.heic,.heif"
+                   required>
+            <small>Поддерживаются форматы: JPG, PNG, GIF, WebP, HEIC</small>
+        </div>
+
+        <!-- Кнопка загрузки -->
+        <div style="margin-top: 10px;">
+            <button type="submit">Загрузить изображение</button>
+        </div>
+    </form>
+</div>
+
+<!-- ============== УДАЛЕНИЕ ИЗОБРАЖЕНИЯ ============== -->
+<div th:if="${product.imageUrl}" style="margin-top: 20px; border: 1px solid #ffcccc; padding: 15px; background-color: #ffe6e6;">
+    <h3>Удалить текущее изображение</h3>
+
+    <form th:action="@{/admin-product/delete-image/{id}(id=${product.id})}"
+          method="post"
+          style="display:inline;">
+        <button type="submit"
+                onclick="return confirm('Вы уверены? Изображение будет удалено!')"
+                style="color: red;">
+            Удалить изображение
+        </button>
+    </form>
+</div>
+
+<!-- ============== УДАЛЕНИЕ ПРОДУКТА ============== -->
+<div style="margin-top: 30px; border: 1px solid #ffcccc; padding: 15px; background-color: #ffe6e6;">
+    <h3>Опасная зона</h3>
+
+    <form th:action="@{/admin-product/delete/{id}(id=${product.id})}"
+          method="post"
+          style="display:inline;">
+        <button type="submit"
+                onclick="return confirm('Вы уверены? Это действие необратимо! Продукт будет полностью удален!')"
+                style="color: red; font-weight: bold;">
+            Удалить продукт
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

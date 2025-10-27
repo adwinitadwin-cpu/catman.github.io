@@ -1,0 +1,226 @@
+<!-- ============== admin/product/list.html ============== -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список продуктов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .success {
+            color: green;
+            background-color: #d4edda;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            background-color: #f8d7da;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .add-button {
+            margin-bottom: 20px;
+        }
+
+        .add-button button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-button button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .no-image {
+            color: #999;
+            font-style: italic;
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .actions button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-view {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-edit {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: #e67e22;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Список продуктов</h1>
+
+<!-- Сообщение об успехе -->
+<div th:if="${success}" class="success">
+    [[${success}]]
+</div>
+
+<!-- Сообщение об ошибке -->
+<div th:if="${error}" class="error">
+    [[${error}]]
+</div>
+
+<!-- Кнопка добавления нового продукта -->
+<div class="add-button">
+    <a th:href="@{/admin-product/form}">
+        <button>+ Добавить продукт</button>
+    </a>
+</div>
+
+<!-- Таблица продуктов -->
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Изображение</th>
+        <th>URL продукта</th>
+        <th>Создано</th>
+        <th>Обновлено</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+
+        <!-- ✅ Изображение продукта -->
+        <td>
+            <div th:if="${product.imageUrl}">
+                <a th:href="${product.imageUrl}" target="_blank">
+                    <img th:src="${product.imageUrl}" alt="Изображение" class="product-image">
+                </a>
+            </div>
+            <div th:unless="${product.imageUrl}" class="no-image">
+                Нет изображения
+            </div>
+        </td>
+
+        <td>
+            <a th:href="${product.urlProduct}" target="_blank" th:text="Открыть"></a>
+        </td>
+        <td th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+        <td th:text="${#temporals.format(product.updatedAt, 'dd.MM.yyyy HH:mm')}"></td>
+
+        <td>
+            <div class="actions">
+                <!-- Кнопка Просмотреть -->
+                <a th:href="@{/admin-product/view/{id}(id=${product.id})}">
+                    <button class="btn-view">👁 Просмотреть</button>
+                </a>
+
+                <!-- Кнопка Редактировать -->
+                <a th:href="@{/admin-product/edit/{id}(id=${product.id})}">
+                    <button class="btn-edit">✏ Редактировать</button>
+                </a>
+
+                <!-- Кнопка Удалить -->
+                <form th:action="@{/admin-product/delete/{id}(id=${product.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn-delete" onclick="return confirm('Вы уверены?')">🗑 Удалить</button>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Если список пуст -->
+<div th:if="${#lists.isEmpty(products)}" class="empty">
+    <p>Продуктов не найдено.</p>
+    <a th:href="@{/admin-product/form}">
+        <button>Создать первый продукт</button>
+    </a>
+</div>
+
+</body>
+</html>
