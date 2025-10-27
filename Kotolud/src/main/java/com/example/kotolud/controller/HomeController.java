@@ -13,8 +13,5 @@ public class HomeController {
         return "index";
 
     }
-    @GetMapping("/product")
-    public String ProductController() {
-        return "pricing";
-    }
+
 }
