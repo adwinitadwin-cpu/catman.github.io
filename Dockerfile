@@ -1,39 +1,34 @@
-# ============== STAGE 1: BUILD (Сборка) ==============
-FROM openjdk:21-jdk-slim AS builder
+# ============== STAGE 1: BUILD ==============
+FROM maven:3.9-openjdk-21 AS builder
 
 WORKDIR /app
 
-# Копируем Maven wrapper и pom.xml
-COPY mvnw .
-COPY .mvn .mvn
+# Копируем pom.xml
 COPY pom.xml .
 
-# Даем права на выполнение
-RUN chmod +x ./mvnw
-
 # Загружаем зависимости
-RUN ./mvnw dependency:go-offline -B
+RUN mvn dependency:go-offline -B
 
 # Копируем исходный код
 COPY src ./src
 
 # Собираем приложение
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
-# ============== STAGE 2: RUNTIME (Запуск) ==============
+# ============== STAGE 2: RUNTIME ==============
 FROM openjdk:21-jdk-slim
 
 WORKDIR /app
 
-# Копируем собранный JAR из stage 1
-COPY --from=builder /app/target/Kotolud-0.0.1-SNAPSHOT.jar app.jar
+# Копируем JAR из builder
+COPY --from=builder /app/target/Kotolud-*.jar app.jar
 
-# Открываем порт (Railway автоматически назначит PORT)
+# Порт
 EXPOSE 8080
 
-# Переменные окружения по умолчанию
+# Переменные
 ENV PORT=8080
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
-# Запускаем приложение с поддержкой PORT переменной
+# Запуск
 CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar --server.port=$PORT"]
