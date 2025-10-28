@@ -1,34 +1,18 @@
-# ============== STAGE 1: BUILD ==============
-FROM maven:3.9.0-openjdk-21 AS builder
+# ============== BUILD ==============
+FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
 
-# Копируем pom.xml
-COPY pom.xml .
+# Устанавливаем Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Загружаем зависимости
-RUN mvn dependency:go-offline -B
+# Копируем всё
+COPY . .
 
-# Копируем исходный код
-COPY src ./src
-
-# Собираем приложение
+# Собираем
 RUN mvn clean package -DskipTests
 
-# ============== STAGE 2: RUNTIME ==============
-FROM openjdk:21-jdk-slim
-
-WORKDIR /app
-
-# Копируем JAR из builder
-COPY --from=builder /app/target/Kotolud-*.jar app.jar
-
-# Порт
+# Запускаем JAR
 EXPOSE 8080
-
-# Переменные
 ENV PORT=8080
-ENV JAVA_OPTS="-Xmx512m -Xms256m"
-
-# Запуск
-CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar --server.port=$PORT"]
+CMD ["sh", "-c", "java -Xmx512m -Xms256m -jar target/Kotolud-*.jar --server.port=$PORT"]
