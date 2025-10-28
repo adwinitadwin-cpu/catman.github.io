@@ -6,8 +6,9 @@ WORKDIR /app
 # Устанавливаем Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Копируем всё
-COPY . .
+# Копируем только необходимые файлы (не всё!)
+COPY pom.xml .
+COPY src ./src
 
 # Собираем
 RUN mvn clean package -DskipTests

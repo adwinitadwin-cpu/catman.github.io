@@ -1,0 +1,21 @@
+
+# Создайте .dockerignore
+cat > .dockerignore << 'EOF'
+target/
+.git
+.gitignore
+.idea
+*.iml
+node_modules
+.DS_Store
+*.log
+.env
+.env.local
+README.md
+docker-compose.yml
+.dockerignore
+Dockerfile
+mvnw
+mvnw.cmd
+.mvn
+EOF
