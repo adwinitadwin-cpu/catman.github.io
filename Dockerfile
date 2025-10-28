@@ -5,8 +5,8 @@ WORKDIR /app
 # Устанавливаем Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Копируем pom.xml
-COPY pom.xml .
+# Копируем pom.xml из подпапки Kotolud
+COPY Kotolud/pom.xml .
 
 # Копируем src из подпапки Kotolud
 COPY Kotolud/src ./src
