@@ -1,255 +1,832 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
+<!--  <title>КоТоЛюД </title>-->
+<!--  <meta name="description" content="Catman">-->
+
+
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">-->
+
+
+<!--  <link rel="stylesheet" href="/css/mycss.css">-->
+<!--  <link rel="stylesheet" href="/css/bgvideo.css">-->
+
+<!--  <link rel="apple-touch-icon" sizes="180x180" href="source/files/favicon-io/apple-touch-icon.png">-->
+<!--  <link rel="icon" type="image/png" sizes="32x32" href="source/files/favicon-io/favicon-32x32.png">-->
+<!--  <link rel="icon" type="image/png" sizes="16x16" href="source/files/favicon-io/favicon-16x16.png">-->
+<!--  <link rel="manifest" href="/site.webmanifest">-->
+
+
+<!--</head>-->
+
+<!--<body>-->
+<!--  <header>-->
+<!--    <nav class="navbar navbar-expand-lg bg-orange">-->
+<!--      <div class="container-fluid">-->
+<!--        <a class="navbar-brand" href="/"><img src="source/images/images.webp" alt="..."></a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"-->
+<!--          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--          <ul class="navbar-nav">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" aria-current="page" href="/">КоТоЛюД</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/product">Магазин</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="/admin">Admin</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" href="../../../../../pricing.html">О нас</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <img style="width: 35px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">-->
+<!--              <a class="nav-link active" href="../../../../../pricing.html"></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <img style="width: 25px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">-->
+<!--              <a class="nav-link active" href="../../../../../pricing.html"></a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--  </header>-->
+
+<!--  <section>-->
+<!--    <div class="bgvideo">-->
+<!--      <video src="source/files/132065-752320574_large.mp4" type="/mp4" autoplay muted loop></video>-->
+<!--      <div class="effect"></div>-->
+<!--      <div class="video-text">-->
+<!--        <h1>КоТоЛюД</h1>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class=".container-fluid mt-4">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-1">-->
+<!--        </div>-->
+
+
+<!--        &lt;!&ndash; ============== ДИНАМИЧЕСКАЯ КАРУСЕЛЬ ТОВАРОВ ============== &ndash;&gt;-->
+<!--        <div class="col-lg-8 col-md-12">-->
+<!--          <div class="row">-->
+
+<!--            &lt;!&ndash; КАРУСЕЛЬ &ndash;&gt;-->
+<!--            <div id="carouselProducts"-->
+<!--                 class="carousel slide"-->
+<!--                 data-bs-ride="carousel"-->
+<!--                 data-bs-interval="5000"-->
+<!--                 data-bs-pause="hover"-->
+<!--                 data-bs-wrap="true">-->
+
+<!--              &lt;!&ndash; ИНДИКАТОРЫ (точки) &ndash;&gt;-->
+<!--              <div class="carousel-indicators">-->
+<!--                <button th:each="product, iter : ${carusel}"-->
+<!--                        type="button"-->
+<!--                        data-bs-target="#carouselProducts"-->
+<!--                        th:data-bs-slide-to="${iter.index}"-->
+<!--                        th:class="${iter.index == 0} ? 'active' : ''"-->
+<!--                        th:aria-label="'Slide ' + ${iter.index + 1}"></button>-->
+<!--              </div>-->
+
+<!--              &lt;!&ndash; СЛАЙДЫ (Содержимое) &ndash;&gt;-->
+<!--              <div class="carousel-inner">-->
+<!--                <div th:each="product, iter : ${carusel}"-->
+<!--                     th:class="${'carousel-item ' + (iter.index == 0 ? 'active' : '')}">-->
+<!--                  <div class="d-block w-100">-->
+<!--                    <div class="row">-->
+<!--                      &lt;!&ndash; Изображение &ndash;&gt;-->
+<!--                      <div class="col-lg-6 col-md-6">-->
+<!--                        <img th:if="${product.imageUrl}"-->
+<!--                             th:src="${product.imageUrl}"-->
+<!--                             class="w-100"-->
+<!--                             th:alt="${product.name}">-->
+<!--                        <img th:unless="${product.imageUrl}"-->
+<!--                             src="source/images/shopping (3).webp"-->
+<!--                             class="w-100"-->
+<!--                             alt="Изображение товара">-->
+<!--                      </div>-->
+
+<!--                      &lt;!&ndash; Текст и информация &ndash;&gt;-->
+<!--                      <div class="col-lg-6 col-md-6 slide-text">-->
+<!--                        &lt;!&ndash; Название &ndash;&gt;-->
+<!--                        <h3 th:text="${product.name}">Название товара</h3>-->
+
+<!--                        &lt;!&ndash; Описание &ndash;&gt;-->
+<!--                        <p th:text="${product.description}">-->
+<!--                          Описание товара-->
+<!--                        </p>-->
+
+<!--                        &lt;!&ndash; Кнопка купить &ndash;&gt;-->
+<!--                        <a th:href="${product.urlProduct}"-->
+<!--                           target="_blank"-->
+<!--                           class="btn btn-primary">-->
+<!--                          Купить-->
+<!--                        </a>-->
+
+<!--                        &lt;!&ndash; Ссылка на подробнее &ndash;&gt;-->
+<!--                        <a th:href="@{/product/{id}(id=${product.id})}"-->
+<!--                           class="btn btn-outline-primary ms-2">-->
+<!--                          Подробнее-->
+<!--                        </a>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              &lt;!&ndash; КНОПКИ НАВИГАЦИИ (Стрелки) &ndash;&gt;-->
+<!--              <button class="carousel-control-prev"-->
+<!--                      type="button"-->
+<!--                      data-bs-target="#carouselProducts"-->
+<!--                      data-bs-slide="prev">-->
+<!--                <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                <span class="visually-hidden">Previous</span>-->
+<!--              </button>-->
+
+<!--              <button class="carousel-control-next"-->
+<!--                      type="button"-->
+<!--                      data-bs-target="#carouselProducts"-->
+<!--                      data-bs-slide="next">-->
+<!--                <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                <span class="visually-hidden">Next</span>-->
+<!--              </button>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; КНОПКА "Смотреть еще" &ndash;&gt;-->
+<!--            <div class="col-lg12 col-md-12 text-center mt-4">-->
+<!--              <a href="/product">-->
+<!--                <button type="button" class="btn btn-outline-primary btn-lg my-4">-->
+<!--                  See More-->
+<!--                </button>-->
+<!--              </a>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; СЕКЦИЯ ПОМОЩИ &ndash;&gt;-->
+<!--            <div class="col-lg12 col-md-12 text-center mt-4">-->
+<!--              <p>Мы можем вам помочь?</p>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg12 col-md-12 text-center">-->
+<!--              <img class="call-anim"-->
+<!--                   style="width: 40px;"-->
+<!--                   src="source/files/photo_2025-10-12_14-22-49.jpg"-->
+<!--                   alt="Помощь">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+<!--        <div class="col-lg-3 col-md-12">-->
+<!--          <div class="row px-2">-->
+<!--            <div class="col-lg-12 sidebar my-4">-->
+<!--              <p>Найбільшим попитом серед товарів для кішок користується продукція першої необхідності: збалансовані-->
+<!--                корми, лотки та наповнювачі, ветеринарні препарати та засоби гігієни. Затребуваними також залишаються-->
+<!--                ласощі, іграшки, точилки для кігтів, спеціальні аксесуари для догляду.. <a href="#">Узнать больше>>></a>-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="col-lg-12 sidebar my-4">-->
+<!--              <p>У кожному ціновому сегменті товарів для кішок є найпопулярніші бренди. Однак є незмінні лідери, які вже-->
+<!--                багато років залишаються на слуху: Savory, Acana, Orijen (виробники кормів). Серед брендів, які-->
+<!--                виготовляють аксесуари, популярні Trixie, Ferplast та інші.<a href="#">Узнать больше>>></a></p>-->
+<!--            </div>-->
+<!--            <div class="col-lg-12 sidebar my-4">-->
+<!--              <p>Вартість товарів для котів і кішок варіюється в широкому діапазоні — від десятків до тисяч гривень.-->
+<!--                Ціни залежать від категорії продукції, обсягу та кількості, бренду. Кожен знайде ідеальні та прийнятні-->
+<!--                за вартістю рішення для свого пухнастика. <a href="#">Узнать больше>>></a></p>-->
+<!--            </div>-->
+<!--            <div class="col-lg-12 sidebar my-4">-->
+<!--              <p>Окремо варто згадати про такий товар як миска та поїлка. Миски повинні бути стійкими, міцними, без-->
+<!--                сторонніх запахів та з безпечних матеріалів. Саме такий товар пропонує "MasterZoo". Ви зможете вибрати-->
+<!--                ємність будь-якого об'єму та форми для води та корму. Товар виготовлений тільки із безпечних, легких у-->
+<!--                догляді матеріалів. <a href="#">Узнать больше>>></a></p>-->
+<!--            </div>-->
+<!--            <div class="col-lg-12 sidebar my-4">-->
+<!--              <p>Ласкавий котик подарує вам багато щасливих хвилин, проте спілкування з улюбленцем дарує радість, коли-->
+<!--                кіт здоровий та задоволений. Щоб вихованець відчував себе у вашому будинку комфортно, був веселий і-->
+<!--                лагідний, слід забезпечити його всім необхідним. Товари для котів відрізняються великою різноманітністю.-->
+<!--                Завдяки широкому асортименту ви зможете вибрати саме те, що потрібне для кішки. <a href="#">Узнать больше>>></a></p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+
+
+<!--      </div>-->
+
+
+<!--    </div>-->
+<!--  </section>-->
+
+<!--  <footer class="mt-4">-->
+<!--    <div class="container-fluid">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-4 col-md-12 footer-text text-center">-->
+<!--          <p>All Rights Reserved 2025</p>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-12 footer-text text-center">-->
+<!--          <p>Contacts<br>Jpb<br>Our Team</p>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-12 media-links">-->
+<!--          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">-->
+<!--          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </footer>-->
+
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"-->
+<!--    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"-->
+<!--    crossorigin="anonymous"></script>-->
+<!--</body>-->
+
+
+<!--</html>-->
+
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КоТоЛюД - Премиальный магазин для кошек</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <title>КоТоЛюД </title>
-  <meta name="description" content="Catman">
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #3d3d3d;
+            line-height: 1.8;
+            background-color: #fefdfb;
+            letter-spacing: 0.3px;
+        }
 
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        p {
+            color: #6b6b6b;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
 
+        /* ===== НАВИГАЦИЯ ===== */
+        nav {
+            background-color: rgba(254, 253, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(61, 61, 61, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
 
-  <link rel="stylesheet" href="/css/mycss.css">
-  <link rel="stylesheet" href="/css/bgvideo.css">
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  <link rel="apple-touch-icon" sizes="180x180" href="source/files/favicon-io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="source/files/favicon-io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="source/files/favicon-io/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3d3d3d;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
 
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            list-style: none;
+        }
 
+        .nav-link {
+            text-decoration: none;
+            color: #3d3d3d;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #3d3d3d;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* ===== HERO СЕКЦИЯ ===== */
+        .hero {
+            padding: 5rem 3rem;
+            background: linear-gradient(135deg, #fefdfb 0%, #faf8f3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(220, 200, 180, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #3d3d3d;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #6b6b6b;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 90%;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            padding: 1rem 2.5rem;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #3d3d3d;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #6b6b6b;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .hero-button:hover::before {
+            left: 0;
+        }
+
+        .hero-button:hover {
+            border-color: #6b6b6b;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            box-shadow: 0 40px 80px rgba(61, 61, 61, 0.12);
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-image {
+                height: 350px;
+                font-size: 8rem;
+            }
+        }
+
+        /* ===== СЕКЦИЯ ТОВАРОВ ===== */
+        .section {
+            padding: 6rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            color: #3d3d3d;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: #3d3d3d;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: #fefdfb;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(61, 61, 61, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid rgba(61, 61, 61, 0.06);
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 48px rgba(61, 61, 61, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #3d3d3d;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: #6b6b6b;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-weight: 300;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-link {
+            display: inline-block;
+            color: #3d3d3d;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        .product-link:hover::after {
+            margin-left: 0.8rem;
+        }
+
+        /* ===== СЕКЦИЯ КАТЕГОРИЙ ===== */
+        .categories-section {
+            background: linear-gradient(180deg, #fefdfb 0%, #faf8f3 100%);
+            border-top: 1px solid rgba(61, 61, 61, 0.08);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: #fefdfb;
+            border-radius: 0;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(61, 61, 61, 0.06);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(61, 61, 61, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(61, 61, 61, 0.02) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(61, 61, 61, 0.12);
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #3d3d3d;
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            font-size: 0.95rem;
+            color: #6b6b6b;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(254, 253, 251, 0.1);
+        }
+
+        footer p {
+            color: #ccc;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid,
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                height: 300px;
+                font-size: 6rem;
+            }
+        }
+
+        /* ===== ПУСТОЕ СОСТОЯНИЕ ===== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            border-radius: 2px;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            color: #6b6b6b;
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg bg-orange">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img src="source/images/images.webp" alt="..."></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">КоТоЛюД</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/product">Магазин</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="../../../../../pricing.html">О нас</a>
-            </li>
-            <li class="nav-item">
-              <img style="width: 35px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">
-              <a class="nav-link active" href="../../../../../pricing.html"></a>
-            </li>
-            <li class="nav-item">
-              <img style="width: 25px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">
-              <a class="nav-link active" href="../../../../../pricing.html"></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <section>
-    <div class="bgvideo">
-      <video src="source/files/132065-752320574_large.mp4" type="/mp4" autoplay muted loop></video>
-      <div class="effect"></div>
-      <div class="video-text">
-        <h1>КоТоЛюД</h1>
-      </div>
+<!-- ===== НАВИГАЦИЯ ===== -->
+<nav>
+    <div class="nav-container">
+        <a href="/" class="logo">КоТоЛюД</a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Главная</a></li>
+            <li><a href="/product" class="nav-link">Магазин</a></li>
+        </ul>
     </div>
+</nav>
 
-    <div class=".container-fluid mt-4">
-      <div class="row">
-        <div class="col-lg-1">
+<!-- ===== HERO СЕКЦИЯ ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Премиальный мир для вашей кошки</h1>
+            <p>Элегантная коллекция товаров, подобранная с заботой о благополучии вашего питомца. От питания до аксессуаров — всё для идеального образа жизни вашей кошки.</p>
+            <a href="/product" class="hero-button">Откройте коллекцию</a>
         </div>
+        <div class="hero-image">😺</div>
+    </div>
+</section>
 
-
-        <!-- ============== ДИНАМИЧЕСКАЯ КАРУСЕЛЬ ТОВАРОВ ============== -->
-        <div class="col-lg-8 col-md-12">
-          <div class="row">
-
-            <!-- КАРУСЕЛЬ -->
-            <div id="carouselProducts"
-                 class="carousel slide"
-                 data-bs-ride="carousel"
-                 data-bs-interval="5000"
-                 data-bs-pause="hover"
-                 data-bs-wrap="true">
-
-              <!-- ИНДИКАТОРЫ (точки) -->
-              <div class="carousel-indicators">
-                <button th:each="product, iter : ${carusel}"
-                        type="button"
-                        data-bs-target="#carouselProducts"
-                        th:data-bs-slide-to="${iter.index}"
-                        th:class="${iter.index == 0} ? 'active' : ''"
-                        th:aria-label="'Slide ' + ${iter.index + 1}"></button>
-              </div>
-
-              <!-- СЛАЙДЫ (Содержимое) -->
-              <div class="carousel-inner">
-                <div th:each="product, iter : ${carusel}"
-                     th:class="${'carousel-item ' + (iter.index == 0 ? 'active' : '')}">
-                  <div class="d-block w-100">
-                    <div class="row">
-                      <!-- Изображение -->
-                      <div class="col-lg-6 col-md-6">
-                        <img th:if="${product.imageUrl}"
-                             th:src="${product.imageUrl}"
-                             class="w-100"
-                             th:alt="${product.name}">
-                        <img th:unless="${product.imageUrl}"
-                             src="source/images/shopping (3).webp"
-                             class="w-100"
-                             alt="Изображение товара">
-                      </div>
-
-                      <!-- Текст и информация -->
-                      <div class="col-lg-6 col-md-6 slide-text">
-                        <!-- Название -->
-                        <h3 th:text="${product.name}">Название товара</h3>
-
-                        <!-- Описание -->
-                        <p th:text="${product.description}">
-                          Описание товара
-                        </p>
-
-                        <!-- Кнопка купить -->
-                        <a th:href="${product.urlProduct}"
-                           target="_blank"
-                           class="btn btn-primary">
-                          Купить
-                        </a>
-
-                        <!-- Ссылка на подробнее -->
-                        <a th:href="@{/product/{id}(id=${product.id})}"
-                           class="btn btn-outline-primary ms-2">
-                          Подробнее
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+<!-- ===== ПОСЛЕДНИЕ ТОВАРЫ ===== -->
+<section class="section">
+    <h2 class="section-title">Избранные товары</h2>
+    <div class="products-grid">
+        <!-- Товары из carusel -->
+        <div th:if="${carusel != null and carusel.size() > 0}">
+            <div th:each="product : ${carusel}" class="product-card">
+                <div class="product-image">
+                    <img th:if="${product.imageUrl != null and product.imageUrl != ''}"
+                         th:src="${product.imageUrl}"
+                         th:alt="${product.name}"
+                         loading="lazy" />
+                    <span th:unless="${product.imageUrl != null and product.imageUrl != ''}">📦</span>
                 </div>
-              </div>
-
-              <!-- КНОПКИ НАВИГАЦИИ (Стрелки) -->
-              <button class="carousel-control-prev"
-                      type="button"
-                      data-bs-target="#carouselProducts"
-                      data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-
-              <button class="carousel-control-next"
-                      type="button"
-                      data-bs-target="#carouselProducts"
-                      data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+                <div class="product-info">
+                    <div class="product-name" th:text="${product.name}"></div>
+                    <div class="product-description" th:text="${product.description}"></div>
+                    <a th:href="${product.urlProduct}" class="product-link">Подробнее</a>
+                </div>
             </div>
-
-            <!-- КНОПКА "Смотреть еще" -->
-            <div class="col-lg12 col-md-12 text-center mt-4">
-              <a href="/product">
-                <button type="button" class="btn btn-outline-primary btn-lg my-4">
-                  See More
-                </button>
-              </a>
-            </div>
-
-            <!-- СЕКЦИЯ ПОМОЩИ -->
-            <div class="col-lg12 col-md-12 text-center mt-4">
-              <p>Мы можем вам помочь?</p>
-            </div>
-
-            <div class="col-lg12 col-md-12 text-center">
-              <img class="call-anim"
-                   style="width: 40px;"
-                   src="source/files/photo_2025-10-12_14-22-49.jpg"
-                   alt="Помощь">
-            </div>
-          </div>
         </div>
 
-
-        <div class="col-lg-3 col-md-12">
-          <div class="row px-2">
-            <div class="col-lg-12 sidebar my-4">
-              <p>Найбільшим попитом серед товарів для кішок користується продукція першої необхідності: збалансовані
-                корми, лотки та наповнювачі, ветеринарні препарати та засоби гігієни. Затребуваними також залишаються
-                ласощі, іграшки, точилки для кігтів, спеціальні аксесуари для догляду.. <a href="#">Узнать больше>>></a>
-              </p>
-            </div>
-            <div class="col-lg-12 sidebar my-4">
-              <p>У кожному ціновому сегменті товарів для кішок є найпопулярніші бренди. Однак є незмінні лідери, які вже
-                багато років залишаються на слуху: Savory, Acana, Orijen (виробники кормів). Серед брендів, які
-                виготовляють аксесуари, популярні Trixie, Ferplast та інші.<a href="#">Узнать больше>>></a></p>
-            </div>
-            <div class="col-lg-12 sidebar my-4">
-              <p>Вартість товарів для котів і кішок варіюється в широкому діапазоні — від десятків до тисяч гривень.
-                Ціни залежать від категорії продукції, обсягу та кількості, бренду. Кожен знайде ідеальні та прийнятні
-                за вартістю рішення для свого пухнастика. <a href="#">Узнать больше>>></a></p>
-            </div>
-            <div class="col-lg-12 sidebar my-4">
-              <p>Окремо варто згадати про такий товар як миска та поїлка. Миски повинні бути стійкими, міцними, без
-                сторонніх запахів та з безпечних матеріалів. Саме такий товар пропонує "MasterZoo". Ви зможете вибрати
-                ємність будь-якого об'єму та форми для води та корму. Товар виготовлений тільки із безпечних, легких у
-                догляді матеріалів. <a href="#">Узнать больше>>></a></p>
-            </div>
-            <div class="col-lg-12 sidebar my-4">
-              <p>Ласкавий котик подарує вам багато щасливих хвилин, проте спілкування з улюбленцем дарує радість, коли
-                кіт здоровий та задоволений. Щоб вихованець відчував себе у вашому будинку комфортно, був веселий і
-                лагідний, слід забезпечити його всім необхідним. Товари для котів відрізняються великою різноманітністю.
-                Завдяки широкому асортименту ви зможете вибрати саме те, що потрібне для кішки. <a href="#">Узнать больше>>></a></p>
-            </div>
-          </div>
+        <!-- Fallback если товаров нет -->
+        <div th:if="${carusel == null or carusel.size() == 0}" class="empty-state">
+            <p>Коллекция пополняется. Следите за обновлениями</p>
         </div>
-
-
-
-      </div>
-
-
     </div>
-  </section>
+</section>
 
-  <footer class="mt-4">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-4 col-md-12 footer-text text-center">
-          <p>All Rights Reserved 2025</p>
+<!-- ===== КАТЕГОРИИ ===== -->
+<section class="section categories-section">
+    <h2 class="section-title">Категории</h2>
+    <div class="categories-grid">
+        <!-- Категории -->
+        <div th:if="${categoryResponseDTOList != null and categoryResponseDTOList.size() > 0}">
+            <div th:each="category : ${categoryResponseDTOList}" class="category-card">
+                <div class="category-icon">✨</div>
+                <div class="category-name" th:text="${category.name}"></div>
+                <div class="category-description" th:text="${category.description}"></div>
+            </div>
         </div>
-        <div class="col-lg-4 col-md-12 footer-text text-center">
-          <p>Contacts<br>Jpb<br>Our Team</p>
+
+        <!-- Fallback если категорий нет -->
+        <div th:if="${categoryResponseDTOList == null or categoryResponseDTOList.size() == 0}"
+             class="empty-state"
+             style="grid-column: 1 / -1;">
+            <p>Категории загружаются</p>
         </div>
-        <div class="col-lg-4 col-md-12 media-links">
-          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">
-          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">
-        </div>
-      </div>
     </div>
-  </footer>
+</section>
 
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>© 2025 КоТоЛюД. Премиальные товары для вашего питомца. Создано с любовью к кошкам.</p>
+</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+<script>
+    // Плавная прокрутка и микровзаимодействия
+    document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Ленивая загрузка изображений
+    if ('IntersectionObserver' in window) {
+        const images = document.querySelectorAll('img[th\\:src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.getAttribute('th:src');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        images.forEach(img => imageObserver.observe(img));
+    }
+</script>
 </body>
-
-
 </html>
