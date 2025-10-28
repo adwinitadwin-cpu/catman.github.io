@@ -1,4 +1,3 @@
-# ============== BUILD ==============V1
 FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
@@ -6,9 +5,11 @@ WORKDIR /app
 # Устанавливаем Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Копируем только необходимые файлы (не всё!)
+# Копируем pom.xml
 COPY pom.xml .
-COPY src ./src
+
+# Копируем src из подпапки Kotolud
+COPY Kotolud/src ./src
 
 # Собираем
 RUN mvn clean package -DskipTests
