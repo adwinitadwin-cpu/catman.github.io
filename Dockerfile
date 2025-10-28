@@ -1,4 +1,4 @@
-# ============== BUILD ==============
+# ============== BUILD ==============V1
 FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
