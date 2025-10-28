@@ -1,5 +1,5 @@
 # ============== STAGE 1: BUILD ==============
-FROM maven:3.9-openjdk-21 AS builder
+FROM maven:3.9.0-openjdk-21 AS builder
 
 WORKDIR /app
 
