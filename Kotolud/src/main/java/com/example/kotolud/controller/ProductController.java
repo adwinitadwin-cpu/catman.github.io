@@ -24,6 +24,7 @@ public class ProductController {
         return "product/view";
     }
 
+
     @GetMapping
     public String product(Model model) {
 
@@ -31,6 +32,10 @@ public class ProductController {
         model.addAttribute("products", list);
         return "product/list";
     }
+
+
+
+
 
 
 

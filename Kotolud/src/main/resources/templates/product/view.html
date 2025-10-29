@@ -1,252 +1,886 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
 
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="/css/mycss.css">-->
+<!--    <title th:text="${product.name} + ' - КоТоЛюД'">Товар - КоТоЛюД</title>-->
+<!--    <meta name="description" th:content="${product.description}">-->
+<!--</head>-->
+
+
+
+<!--<body>-->
+<!--&lt;!&ndash; НАВИГАЦИЯ &ndash;&gt;-->
+<!--<header>-->
+<!--    <nav class="navbar navbar-expand-lg bg-orange">-->
+<!--        <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="/"><img src="/source/images/images.webp" alt="КоТоЛюД"></a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"-->
+<!--                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--                <ul class="navbar-nav">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" aria-current="page" href="/">КоТоЛюД</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" href="/product">Магазин</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" href="/about">О нас</a>-->
+<!--                    </li>-->
+
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--&lt;!&ndash; ОСНОВНОЕ СОДЕРЖИМОЕ &ndash;&gt;-->
+<!--<section>-->
+<!--    <div class="container-fluid mt-4">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-1"></div>-->
+
+<!--            &lt;!&ndash; ОСНОВНАЯ ЧАСТЬ ТОВАРА &ndash;&gt;-->
+<!--            <div class="col-lg-8 col-md-12">-->
+<!--                <div class="row">-->
+<!--                    &lt;!&ndash; ХЛЕБНЫЕ КРОШКИ &ndash;&gt;-->
+<!--                    <div class="col-lg-12 mb-4">-->
+<!--                        <nav aria-label="breadcrumb">-->
+<!--                            <ol class="breadcrumb">-->
+<!--                                <li class="breadcrumb-item"><a href="/">Главная</a></li>-->
+<!--                                <li class="breadcrumb-item"><a href="/product">Магазин</a></li>-->
+<!--                                <li class="breadcrumb-item active" th:text="${product.name}">Товар</li>-->
+<!--                            </ol>-->
+<!--                        </nav>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ И ИНФОРМАЦИЯ &ndash;&gt;-->
+<!--                    <div class="col-lg-6 col-md-12 mb-4">-->
+<!--                        &lt;!&ndash; Основное изображение &ndash;&gt;-->
+<!--                        <div class="mb-3">-->
+<!--                            <img th:if="${product.imageUrl}"-->
+<!--                                 th:src="${product.imageUrl}"-->
+<!--                                 id="mainImage"-->
+<!--                                 class="img-fluid rounded"-->
+<!--                                 style="max-height: 500px; object-fit: cover;"-->
+<!--                                 th:alt="${product.name}">-->
+<!--                            <img th:unless="${product.imageUrl}"-->
+<!--                                 src="/source/images/shopping (12).webp"-->
+<!--                                 id="mainImage"-->
+<!--                                 class="img-fluid rounded"-->
+<!--                                 style="max-height: 500px; object-fit: cover;"-->
+<!--                                 alt="Изображение товара">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; ИНФОРМАЦИЯ О ТОВАРЕ &ndash;&gt;-->
+<!--                    <div class="col-lg-6 col-md-12">-->
+<!--                        &lt;!&ndash; Название &ndash;&gt;-->
+<!--                        <h1 th:text="${product.name}" class="mb-3">Название товара</h1>-->
+
+<!--                        &lt;!&ndash; ID категории (если нужно) &ndash;&gt;-->
+<!--                        <div th:if="${product.categoryId}" class="mb-2">-->
+<!--                            <span class="badge bg-primary" th:text="'Категория ID: ' + ${product.categoryId}"></span>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; Описание &ndash;&gt;-->
+<!--                        <div class="mb-4">-->
+<!--                            <h5>Описание:</h5>-->
+<!--                            <p th:text="${product.description}" class="text-muted">-->
+<!--                                Описание товара-->
+<!--                            </p>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; Даты &ndash;&gt;-->
+<!--                        <div class="mb-4">-->
+<!--                            <small class="text-muted">-->
+<!--                                Создано: <span th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy HH:mm')}">дата</span>-->
+<!--                            </small>-->
+<!--                            <br>-->
+<!--                            <small class="text-muted">-->
+<!--                                Обновлено: <span th:text="${#temporals.format(product.updatedAt, 'dd.MM.yyyy HH:mm')}">дата</span>-->
+<!--                            </small>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; КНОПКИ ДЕЙСТВИЙ &ndash;&gt;-->
+<!--                        <div class="d-grid gap-2 mb-4">-->
+<!--                            &lt;!&ndash; Купить &ndash;&gt;-->
+<!--                            <a th:href="${product.urlProduct}"-->
+<!--                               target="_blank"-->
+<!--                               class="btn btn-primary btn-lg">-->
+<!--                                🛒 Купить-->
+<!--                            </a>-->
+
+<!--                            &lt;!&ndash; Поделиться в соцсетях &ndash;&gt;-->
+<!--                            <div class="d-flex gap-2 mt-3">-->
+<!--                                <a href="#" class="btn btn-outline-primary flex-grow-1">-->
+<!--                                    📱 Поделиться-->
+<!--                                </a>-->
+<!--                                <a href="/product" class="btn btn-outline-secondary flex-grow-1">-->
+<!--                                    ← Назад к каталогу-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        &lt;!&ndash; ИНФОРМАЦИЯ О ТОВАРЕ &ndash;&gt;-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Информация о товаре</h5>-->
+<!--                                <ul class="list-unstyled">-->
+<!--                                    <li class="mb-2">-->
+<!--                                        <strong>ID:</strong> <span th:text="${product.id}">ID</span>-->
+<!--                                    </li>-->
+<!--                                    <li class="mb-2">-->
+<!--                                        <strong>Название:</strong> <span th:text="${product.name}">Название</span>-->
+<!--                                    </li>-->
+<!--                                    <li th:if="${product.categoryId}" class="mb-2">-->
+<!--                                        <strong>Категория:</strong> <span th:text="${product.categoryId}">Категория</span>-->
+<!--                                    </li>-->
+<!--                                    <li th:if="${product.urlProduct}" class="mb-2">-->
+<!--                                        <strong>Ссылка:</strong>-->
+<!--                                        <a th:href="${product.urlProduct}"-->
+<!--                                           target="_blank"-->
+<!--                                           class="text-truncate d-block">-->
+<!--                                            <span th:text="${#strings.abbreviate(product.urlProduct, 50)}">Ссылка</span>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; ПОЛНОЕ ОПИСАНИЕ &ndash;&gt;-->
+<!--                <div class="row mt-5">-->
+<!--                    <div class="col-lg-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">Подробное описание</h5>-->
+<!--                                <p th:text="${product.description}" class="card-text">-->
+<!--                                    Полное описание товара-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; СЕКЦИЯ ПОМОЩИ &ndash;&gt;-->
+<!--                <div class="row mt-5">-->
+<!--                    <div class="col-lg-12 text-center">-->
+<!--                        <p>Мы можем вам помочь?</p>-->
+<!--                        <img class="call-anim"-->
+<!--                             style="width: 40px;"-->
+<!--                             src="/source/files/photo_2025-10-12_14-22-49.jpg"-->
+<!--                             alt="Помощь">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; БОКОВАЯ ПАНЕЛЬ &ndash;&gt;-->
+<!--            <div class="col-lg-3 col-md-12">-->
+<!--                <div class="row px-2">-->
+<!--                    &lt;!&ndash; РЕКОМЕНДОВАННЫЕ ТОВАРЫ &ndash;&gt;-->
+<!--                    <div class="col-lg-12 sidebar my-4">-->
+<!--                        <h5>Рекомендуемые товары</h5>-->
+<!--                        <p>Посетите наш <a href="/product">каталог</a> для просмотра других товаров.</p>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; ИНФОРМАЦИЯ О МАГАЗИНЕ &ndash;&gt;-->
+<!--                    <div class="col-lg-12 sidebar my-4">-->
+<!--                        <h5>О магазине КоТоЛюД</h5>-->
+<!--                        <p>Найпопулярніший товар - корм та ласощі для котів. Для котів правильно збалансоване-->
+<!--                            харчування дуже важливе, щоб зберегти здоров'я та активність, для довгого повноцінного-->
+<!--                            життя. <a href="#">Узнать больше>>></a></p>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; КОНТАКТЫ &ndash;&gt;-->
+<!--                    <div class="col-lg-12 sidebar my-4">-->
+<!--                        <h5>Контакты</h5>-->
+<!--                        <p>Email: info@kotolud.com<br>-->
+<!--                            Телефон: +380 XX XXX XX XX<br>-->
+<!--                            <a href="#">Связаться с нами</a>-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--</body>-->
+
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/mycss.css">
     <title th:text="${product.name} + ' - КоТоЛюД'">Товар - КоТоЛюД</title>
     <meta name="description" th:content="${product.description}">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #3d3d3d;
+            line-height: 1.8;
+            background-color: #fefdfb;
+            letter-spacing: 0.3px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #6b6b6b;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        nav {
+            background-color: rgba(254, 253, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(61, 61, 61, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3d3d3d;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #3d3d3d;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #3d3d3d;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item {
+            color: #6b6b6b;
+        }
+
+        .breadcrumb-item a {
+            color: #3d3d3d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #6b6b6b;
+        }
+
+        .breadcrumb-item::after {
+            content: '→';
+            margin-left: 0.8rem;
+            color: #6b6b6b;
+        }
+
+        .breadcrumb-item:last-child::after {
+            content: '';
+            margin-left: 0;
+        }
+
+        .breadcrumb-item.active {
+            color: #3d3d3d;
+            font-weight: 500;
+        }
+
+        /* ===== ОСНОВНОЕ СОДЕРЖИМОЕ ===== */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem 3rem;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(61, 61, 61, 0.12);
+            margin-bottom: 2rem;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .main-image-placeholder {
+            font-size: 6rem;
+        }
+
+        /* ===== ИНФОРМАЦИЯ О ТОВАРЕ ===== */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0;
+            font-size: 0.85rem;
+            color: #6b6b6b;
+            font-weight: 500;
+        }
+
+        .product-description {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(61, 61, 61, 0.1);
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #6b6b6b;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: #3d3d3d;
+        }
+
+        /* ===== ДЕЙСТВИЯ ===== */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn-primary {
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            padding: 1.1rem 2rem;
+            border: 2px solid #3d3d3d;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-align: center;
+            display: block;
+        }
+
+        .btn-primary:hover {
+            background-color: #6b6b6b;
+            border-color: #6b6b6b;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #3d3d3d;
+            padding: 1rem 1.5rem;
+            border: 2px solid #3d3d3d;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3d3d3d;
+            color: #fefdfb;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .buttons-group .btn-secondary {
+            flex: 1;
+        }
+
+        /* ===== БОКОВАЯ ПАНЕЛЬ ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: #fefdfb;
+            padding: 2rem;
+            border-radius: 0;
+            box-shadow: 0 8px 24px rgba(61, 61, 61, 0.08);
+            border: 1px solid rgba(61, 61, 61, 0.06);
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #3d3d3d;
+        }
+
+        .sidebar-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #6b6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-link {
+            color: #3d3d3d;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-link:hover {
+            color: #6b6b6b;
+        }
+
+        .help-icon {
+            width: 50px;
+            height: 50px;
+            margin: 1rem auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .help-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== ДЕТАЛЬНОЕ ОПИСАНИЕ ===== */
+        .details-section {
+            background: #fefdfb;
+            padding: 3rem;
+            border-radius: 2px;
+            box-shadow: 0 8px 24px rgba(61, 61, 61, 0.08);
+            border: 1px solid rgba(61, 61, 61, 0.06);
+            margin-bottom: 3rem;
+        }
+
+        .details-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #3d3d3d;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .details-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: #3d3d3d;
+        }
+
+        .details-content {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #6b6b6b;
+        }
+
+        /* ===== ПОМОЩЬ ===== */
+        .help-section {
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            padding: 3rem;
+            text-align: center;
+            border-radius: 2px;
+        }
+
+        .help-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            padding: 3rem;
+            border-top: 1px solid rgba(254, 253, 251, 0.1);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-weight: 300;
+            font-size: 0.95rem;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1200px) {
+            .product-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .sidebar {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .sidebar-card {
+                flex: 1;
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .main-container,
+            .breadcrumb-container {
+                padding: 1.5rem;
+            }
+
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .main-image {
+                height: 350px;
+            }
+
+            .buttons-group {
+                flex-direction: column;
+            }
+
+            .buttons-group .btn-secondary {
+                width: 100%;
+            }
+
+            .sidebar {
+                flex-direction: column;
+            }
+
+            .details-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
-
-
 <body>
-<!-- НАВИГАЦИЯ -->
-<header>
-    <nav class="navbar navbar-expand-lg bg-orange">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/source/images/images.webp" alt="КоТоЛюД"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">КоТоЛюД</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/product">Магазин</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">О нас</a>
-                    </li>
-                    <li class="nav-item">
-                        <img style="width: 35px; margin-inline: 1em;"
-                             src="/source/files/photo_2025-10-12_14-22-17.jpg" alt="Профиль">
-                        <a class="nav-link active" href="#"></a>
-                    </li>
-                    <li class="nav-item">
-                        <img style="width: 25px; margin-inline: 1em;"
-                             src="/source/files/photo_2025-10-12_14-22-40.jpg" alt="Корзина">
-                        <a class="nav-link active" href="#"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
-<section>
-    <div class="container-fluid mt-4">
-        <div class="row">
-            <div class="col-lg-1"></div>
-
-            <!-- ОСНОВНАЯ ЧАСТЬ ТОВАРА -->
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <!-- ХЛЕБНЫЕ КРОШКИ -->
-                    <div class="col-lg-12 mb-4">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li class="breadcrumb-item"><a href="/product">Магазин</a></li>
-                                <li class="breadcrumb-item active" th:text="${product.name}">Товар</li>
-                            </ol>
-                        </nav>
-                    </div>
-
-                    <!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ И ИНФОРМАЦИЯ -->
-                    <div class="col-lg-6 col-md-12 mb-4">
-                        <!-- Основное изображение -->
-                        <div class="mb-3">
-                            <img th:if="${product.imageUrl}"
-                                 th:src="${product.imageUrl}"
-                                 id="mainImage"
-                                 class="img-fluid rounded"
-                                 style="max-height: 500px; object-fit: cover;"
-                                 th:alt="${product.name}">
-                            <img th:unless="${product.imageUrl}"
-                                 src="/source/images/shopping (12).webp"
-                                 id="mainImage"
-                                 class="img-fluid rounded"
-                                 style="max-height: 500px; object-fit: cover;"
-                                 alt="Изображение товара">
-                        </div>
-                    </div>
-
-                    <!-- ИНФОРМАЦИЯ О ТОВАРЕ -->
-                    <div class="col-lg-6 col-md-12">
-                        <!-- Название -->
-                        <h1 th:text="${product.name}" class="mb-3">Название товара</h1>
-
-                        <!-- ID категории (если нужно) -->
-                        <div th:if="${product.categoryId}" class="mb-2">
-                            <span class="badge bg-primary" th:text="'Категория ID: ' + ${product.categoryId}"></span>
-                        </div>
-
-                        <!-- Описание -->
-                        <div class="mb-4">
-                            <h5>Описание:</h5>
-                            <p th:text="${product.description}" class="text-muted">
-                                Описание товара
-                            </p>
-                        </div>
-
-                        <!-- Даты -->
-                        <div class="mb-4">
-                            <small class="text-muted">
-                                Создано: <span th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy HH:mm')}">дата</span>
-                            </small>
-                            <br>
-                            <small class="text-muted">
-                                Обновлено: <span th:text="${#temporals.format(product.updatedAt, 'dd.MM.yyyy HH:mm')}">дата</span>
-                            </small>
-                        </div>
-
-                        <!-- КНОПКИ ДЕЙСТВИЙ -->
-                        <div class="d-grid gap-2 mb-4">
-                            <!-- Купить -->
-                            <a th:href="${product.urlProduct}"
-                               target="_blank"
-                               class="btn btn-primary btn-lg">
-                                🛒 Купить
-                            </a>
-
-                            <!-- Поделиться в соцсетях -->
-                            <div class="d-flex gap-2 mt-3">
-                                <a href="#" class="btn btn-outline-primary flex-grow-1">
-                                    📱 Поделиться
-                                </a>
-                                <a href="/product" class="btn btn-outline-secondary flex-grow-1">
-                                    ← Назад к каталогу
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- ИНФОРМАЦИЯ О ТОВАРЕ -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Информация о товаре</h5>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">
-                                        <strong>ID:</strong> <span th:text="${product.id}">ID</span>
-                                    </li>
-                                    <li class="mb-2">
-                                        <strong>Название:</strong> <span th:text="${product.name}">Название</span>
-                                    </li>
-                                    <li th:if="${product.categoryId}" class="mb-2">
-                                        <strong>Категория:</strong> <span th:text="${product.categoryId}">Категория</span>
-                                    </li>
-                                    <li th:if="${product.urlProduct}" class="mb-2">
-                                        <strong>Ссылка:</strong>
-                                        <a th:href="${product.urlProduct}"
-                                           target="_blank"
-                                           class="text-truncate d-block">
-                                            <span th:text="${#strings.abbreviate(product.urlProduct, 50)}">Ссылка</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ПОЛНОЕ ОПИСАНИЕ -->
-                <div class="row mt-5">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Подробное описание</h5>
-                                <p th:text="${product.description}" class="card-text">
-                                    Полное описание товара
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- СЕКЦИЯ ПОМОЩИ -->
-                <div class="row mt-5">
-                    <div class="col-lg-12 text-center">
-                        <p>Мы можем вам помочь?</p>
-                        <img class="call-anim"
-                             style="width: 40px;"
-                             src="/source/files/photo_2025-10-12_14-22-49.jpg"
-                             alt="Помощь">
-                    </div>
-                </div>
-            </div>
-
-            <!-- БОКОВАЯ ПАНЕЛЬ -->
-            <div class="col-lg-3 col-md-12">
-                <div class="row px-2">
-                    <!-- РЕКОМЕНДОВАННЫЕ ТОВАРЫ -->
-                    <div class="col-lg-12 sidebar my-4">
-                        <h5>Рекомендуемые товары</h5>
-                        <p>Посетите наш <a href="/product">каталог</a> для просмотра других товаров.</p>
-                    </div>
-
-                    <!-- ИНФОРМАЦИЯ О МАГАЗИНЕ -->
-                    <div class="col-lg-12 sidebar my-4">
-                        <h5>О магазине КоТоЛюД</h5>
-                        <p>Найпопулярніший товар - корм та ласощі для котів. Для котів правильно збалансоване
-                            харчування дуже важливе, щоб зберегти здоров'я та активність, для довгого повноцінного
-                            життя. <a href="#">Узнать больше>>></a></p>
-                    </div>
-
-                    <!-- КОНТАКТЫ -->
-                    <div class="col-lg-12 sidebar my-4">
-                        <h5>Контакты</h5>
-                        <p>Email: info@kotolud.com<br>
-                            Телефон: +380 XX XXX XX XX<br>
-                            <a href="#">Связаться с нами</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+<!-- ===== НАВИГАЦИЯ ===== -->
+<nav>
+    <div class="nav-container">
+        <a href="/" class="logo">КоТоЛюД</a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Главная</a></li>
+            <li><a href="/product" class="nav-link">Магазин</a></li>
+            <li><a href="/about" class="nav-link">О нас</a></li>
+        </ul>
+        <div class="nav-icons">
+            <img src="source/files/photo_2025-10-12_14-22-17.jpg" alt="Profile" class="nav-icon">
+            <img src="source/files/photo_2025-10-12_14-22-40.jpg" alt="Cart" class="nav-icon">
         </div>
     </div>
-</section>
+</nav>
 
-<!-- ФУТЕР -->
-<footer class="mt-4">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 footer-text text-center">
-                <p>All Rights Reserved 2025</p>
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb-container">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+        <li class="breadcrumb-item"><a href="/product">Магазин</a></li>
+        <li class="breadcrumb-item active" th:text="${product.name}">Товар</li>
+    </ol>
+</div>
+
+<!-- ===== ОСНОВНОЕ СОДЕРЖИМОЕ ===== -->
+<div class="main-container">
+    <div class="product-layout">
+        <!-- ===== ГАЛЕРЕЯ ===== -->
+        <section class="gallery-section">
+            <div class="main-image">
+                <img th:if="${product.imageUrl != null and product.imageUrl != ''}"
+                     th:src="${product.imageUrl}"
+                     th:alt="${product.name}"
+                     id="mainImage" />
+                <span th:unless="${product.imageUrl != null and product.imageUrl != ''}" class="main-image-placeholder">📦</span>
             </div>
-            <div class="col-lg-4 col-md-12 footer-text text-center">
-                <p>Contacts<br>Jobs<br>Our Team</p>
+        </section>
+
+        <!-- ===== ИНФОРМАЦИЯ О ТОВАРЕ ===== -->
+        <section class="product-info">
+            <h1 class="product-title" th:text="${product.name}">Название товара</h1>
+
+            <div class="product-meta">
+                <div class="meta-badge" th:if="${product.categoryId}">
+                    <span th:text="'Категория ID: ' + ${product.categoryId}"></span>
+                </div>
+                <div class="meta-badge">Премиум качество</div>
+                <div class="meta-badge">В наличии</div>
             </div>
-            <div class="col-lg-4 col-md-12 media-links">
-                <img style="width: 40px; margin-inline: 1em;"
-                     src="/source/files/photo_2025-10-12_14-22-17.jpg" alt="Facebook">
-                <img style="width: 40px; margin-inline: 1em;"
-                     src="/source/files/photo_2025-10-12_14-22-40.jpg" alt="Instagram">
+
+            <p class="product-description" th:text="${product.description}">
+                Описание товара
+            </p>
+
+            <div class="info-item">
+                <div class="info-label">Артикул</div>
+                <div class="info-value" th:text="${product.id}">ID</div>
             </div>
+
+            <div class="info-item" th:if="${product.categoryId}">
+                <div class="info-label">Категория</div>
+                <div class="info-value" th:text="${product.categoryId}">Категория</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">Добавлено</div>
+                <div class="info-value" th:text="${#temporals.format(product.createdAt, 'dd.MM.yyyy')}">Дата</div>
+            </div>
+
+            <div class="action-buttons">
+                <a th:href="${product.urlProduct}"
+                   target="_blank"
+                   class="btn-primary">
+                    🛒 Купить товар
+                </a>
+                <div class="buttons-group">
+                    <a href="#" class="btn-secondary">📱 Поделиться</a>
+                    <a href="/product" class="btn-secondary">← Каталог</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Рекомендации</h3>
+                <p class="sidebar-text">Откройте наш <a href="/product" class="sidebar-link">полный каталог</a> для просмотра других премиальных товаров для вашей кошки.</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">О товаре</h3>
+                <p class="sidebar-text">Товары КоТоЛюД подбираются с особой тщательностью. Мы выбираем только лучшее для здоровья и счастья вашего питомца.</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">Контакты</h3>
+                <p class="sidebar-text">
+                    Email: info@kotolud.com<br>
+                    Телефон: +380 XX XXX XX XX
+                </p>
+                <a href="#" class="sidebar-link">Связаться с нами</a>
+            </div>
+
+            <div class="sidebar-card" style="text-align: center;">
+                <p class="sidebar-text">Нужна помощь?</p>
+                <img src="source/files/photo_2025-10-12_14-22-49.jpg" alt="Support" class="help-icon">
+            </div>
+        </aside>
+    </div>
+
+    <!-- ===== ДЕТАЛЬНОЕ ОПИСАНИЕ ===== -->
+    <section class="details-section">
+        <h2 class="details-title">Полное описание</h2>
+        <div class="details-content">
+            <p th:text="${product.description}">Полное описание товара</p>
+        </div>
+    </section>
+
+    <!-- ===== ПОМОЩЬ ===== -->
+    <section class="help-section">
+        <p>Остались вопросы? Мы всегда готовы помочь!</p>
+        <img src="source/files/photo_2025-10-12_14-22-49.jpg" alt="Support" class="help-icon">
+    </section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-text">
+            <p>&copy; 2025 КоТоЛюД. Все права защищены.</p>
+        </div>
+        <div class="footer-text">
+            <p>Контакты<br>О нас<br>Наша команда</p>
+        </div>
+        <div class="footer-links">
+            <img src="source/files/photo_2025-10-12_14-22-17.jpg" alt="Social" class="footer-icon">
+            <img src="source/files/photo_2025-10-12_14-22-40.jpg" alt="Social" class="footer-icon">
         </div>
     </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
 </body>
-
 </html>
