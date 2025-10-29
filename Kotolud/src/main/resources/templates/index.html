@@ -1,259 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-
-<!--  <title>КоТоЛюД </title>-->
-<!--  <meta name="description" content="Catman">-->
-
-
-<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"-->
-<!--    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">-->
-
-
-<!--  <link rel="stylesheet" href="/css/mycss.css">-->
-<!--  <link rel="stylesheet" href="/css/bgvideo.css">-->
-
-<!--  <link rel="apple-touch-icon" sizes="180x180" href="source/files/favicon-io/apple-touch-icon.png">-->
-<!--  <link rel="icon" type="image/png" sizes="32x32" href="source/files/favicon-io/favicon-32x32.png">-->
-<!--  <link rel="icon" type="image/png" sizes="16x16" href="source/files/favicon-io/favicon-16x16.png">-->
-<!--  <link rel="manifest" href="/site.webmanifest">-->
-
-
-<!--</head>-->
-
-<!--<body>-->
-<!--  <header>-->
-<!--    <nav class="navbar navbar-expand-lg bg-orange">-->
-<!--      <div class="container-fluid">-->
-<!--        <a class="navbar-brand" href="/"><img src="source/images/images.webp" alt="..."></a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"-->
-<!--          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--          <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--          <ul class="navbar-nav">-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link active" aria-current="page" href="/">КоТоЛюД</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link" href="/product">Магазин</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link" href="/admin">Admin</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <a class="nav-link active" href="../../../../../pricing.html">О нас</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <img style="width: 35px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">-->
-<!--              <a class="nav-link active" href="../../../../../pricing.html"></a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--              <img style="width: 25px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">-->
-<!--              <a class="nav-link active" href="../../../../../pricing.html"></a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </nav>-->
-<!--  </header>-->
-
-<!--  <section>-->
-<!--    <div class="bgvideo">-->
-<!--      <video src="source/files/132065-752320574_large.mp4" type="/mp4" autoplay muted loop></video>-->
-<!--      <div class="effect"></div>-->
-<!--      <div class="video-text">-->
-<!--        <h1>КоТоЛюД</h1>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class=".container-fluid mt-4">-->
-<!--      <div class="row">-->
-<!--        <div class="col-lg-1">-->
-<!--        </div>-->
-
-
-<!--        &lt;!&ndash; ============== ДИНАМИЧЕСКАЯ КАРУСЕЛЬ ТОВАРОВ ============== &ndash;&gt;-->
-<!--        <div class="col-lg-8 col-md-12">-->
-<!--          <div class="row">-->
-
-<!--            &lt;!&ndash; КАРУСЕЛЬ &ndash;&gt;-->
-<!--            <div id="carouselProducts"-->
-<!--                 class="carousel slide"-->
-<!--                 data-bs-ride="carousel"-->
-<!--                 data-bs-interval="5000"-->
-<!--                 data-bs-pause="hover"-->
-<!--                 data-bs-wrap="true">-->
-
-<!--              &lt;!&ndash; ИНДИКАТОРЫ (точки) &ndash;&gt;-->
-<!--              <div class="carousel-indicators">-->
-<!--                <button th:each="product, iter : ${carusel}"-->
-<!--                        type="button"-->
-<!--                        data-bs-target="#carouselProducts"-->
-<!--                        th:data-bs-slide-to="${iter.index}"-->
-<!--                        th:class="${iter.index == 0} ? 'active' : ''"-->
-<!--                        th:aria-label="'Slide ' + ${iter.index + 1}"></button>-->
-<!--              </div>-->
-
-<!--              &lt;!&ndash; СЛАЙДЫ (Содержимое) &ndash;&gt;-->
-<!--              <div class="carousel-inner">-->
-<!--                <div th:each="product, iter : ${carusel}"-->
-<!--                     th:class="${'carousel-item ' + (iter.index == 0 ? 'active' : '')}">-->
-<!--                  <div class="d-block w-100">-->
-<!--                    <div class="row">-->
-<!--                      &lt;!&ndash; Изображение &ndash;&gt;-->
-<!--                      <div class="col-lg-6 col-md-6">-->
-<!--                        <img th:if="${product.imageUrl}"-->
-<!--                             th:src="${product.imageUrl}"-->
-<!--                             class="w-100"-->
-<!--                             th:alt="${product.name}">-->
-<!--                        <img th:unless="${product.imageUrl}"-->
-<!--                             src="source/images/shopping (3).webp"-->
-<!--                             class="w-100"-->
-<!--                             alt="Изображение товара">-->
-<!--                      </div>-->
-
-<!--                      &lt;!&ndash; Текст и информация &ndash;&gt;-->
-<!--                      <div class="col-lg-6 col-md-6 slide-text">-->
-<!--                        &lt;!&ndash; Название &ndash;&gt;-->
-<!--                        <h3 th:text="${product.name}">Название товара</h3>-->
-
-<!--                        &lt;!&ndash; Описание &ndash;&gt;-->
-<!--                        <p th:text="${product.description}">-->
-<!--                          Описание товара-->
-<!--                        </p>-->
-
-<!--                        &lt;!&ndash; Кнопка купить &ndash;&gt;-->
-<!--                        <a th:href="${product.urlProduct}"-->
-<!--                           target="_blank"-->
-<!--                           class="btn btn-primary">-->
-<!--                          Купить-->
-<!--                        </a>-->
-
-<!--                        &lt;!&ndash; Ссылка на подробнее &ndash;&gt;-->
-<!--                        <a th:href="@{/product/{id}(id=${product.id})}"-->
-<!--                           class="btn btn-outline-primary ms-2">-->
-<!--                          Подробнее-->
-<!--                        </a>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-
-<!--              &lt;!&ndash; КНОПКИ НАВИГАЦИИ (Стрелки) &ndash;&gt;-->
-<!--              <button class="carousel-control-prev"-->
-<!--                      type="button"-->
-<!--                      data-bs-target="#carouselProducts"-->
-<!--                      data-bs-slide="prev">-->
-<!--                <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--                <span class="visually-hidden">Previous</span>-->
-<!--              </button>-->
-
-<!--              <button class="carousel-control-next"-->
-<!--                      type="button"-->
-<!--                      data-bs-target="#carouselProducts"-->
-<!--                      data-bs-slide="next">-->
-<!--                <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--                <span class="visually-hidden">Next</span>-->
-<!--              </button>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash; КНОПКА "Смотреть еще" &ndash;&gt;-->
-<!--            <div class="col-lg12 col-md-12 text-center mt-4">-->
-<!--              <a href="/product">-->
-<!--                <button type="button" class="btn btn-outline-primary btn-lg my-4">-->
-<!--                  See More-->
-<!--                </button>-->
-<!--              </a>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash; СЕКЦИЯ ПОМОЩИ &ndash;&gt;-->
-<!--            <div class="col-lg12 col-md-12 text-center mt-4">-->
-<!--              <p>Мы можем вам помочь?</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg12 col-md-12 text-center">-->
-<!--              <img class="call-anim"-->
-<!--                   style="width: 40px;"-->
-<!--                   src="source/files/photo_2025-10-12_14-22-49.jpg"-->
-<!--                   alt="Помощь">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-
-<!--        <div class="col-lg-3 col-md-12">-->
-<!--          <div class="row px-2">-->
-<!--            <div class="col-lg-12 sidebar my-4">-->
-<!--              <p>Найбільшим попитом серед товарів для кішок користується продукція першої необхідності: збалансовані-->
-<!--                корми, лотки та наповнювачі, ветеринарні препарати та засоби гігієни. Затребуваними також залишаються-->
-<!--                ласощі, іграшки, точилки для кігтів, спеціальні аксесуари для догляду.. <a href="#">Узнать больше>>></a>-->
-<!--              </p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-12 sidebar my-4">-->
-<!--              <p>У кожному ціновому сегменті товарів для кішок є найпопулярніші бренди. Однак є незмінні лідери, які вже-->
-<!--                багато років залишаються на слуху: Savory, Acana, Orijen (виробники кормів). Серед брендів, які-->
-<!--                виготовляють аксесуари, популярні Trixie, Ferplast та інші.<a href="#">Узнать больше>>></a></p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-12 sidebar my-4">-->
-<!--              <p>Вартість товарів для котів і кішок варіюється в широкому діапазоні — від десятків до тисяч гривень.-->
-<!--                Ціни залежать від категорії продукції, обсягу та кількості, бренду. Кожен знайде ідеальні та прийнятні-->
-<!--                за вартістю рішення для свого пухнастика. <a href="#">Узнать больше>>></a></p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-12 sidebar my-4">-->
-<!--              <p>Окремо варто згадати про такий товар як миска та поїлка. Миски повинні бути стійкими, міцними, без-->
-<!--                сторонніх запахів та з безпечних матеріалів. Саме такий товар пропонує "MasterZoo". Ви зможете вибрати-->
-<!--                ємність будь-якого об'єму та форми для води та корму. Товар виготовлений тільки із безпечних, легких у-->
-<!--                догляді матеріалів. <a href="#">Узнать больше>>></a></p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-12 sidebar my-4">-->
-<!--              <p>Ласкавий котик подарує вам багато щасливих хвилин, проте спілкування з улюбленцем дарує радість, коли-->
-<!--                кіт здоровий та задоволений. Щоб вихованець відчував себе у вашому будинку комфортно, був веселий і-->
-<!--                лагідний, слід забезпечити його всім необхідним. Товари для котів відрізняються великою різноманітністю.-->
-<!--                Завдяки широкому асортименту ви зможете вибрати саме те, що потрібне для кішки. <a href="#">Узнать больше>>></a></p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-
-
-<!--      </div>-->
-
-
-<!--    </div>-->
-<!--  </section>-->
-
-<!--  <footer class="mt-4">-->
-<!--    <div class="container-fluid">-->
-<!--      <div class="row">-->
-<!--        <div class="col-lg-4 col-md-12 footer-text text-center">-->
-<!--          <p>All Rights Reserved 2025</p>-->
-<!--        </div>-->
-<!--        <div class="col-lg-4 col-md-12 footer-text text-center">-->
-<!--          <p>Contacts<br>Jpb<br>Our Team</p>-->
-<!--        </div>-->
-<!--        <div class="col-lg-4 col-md-12 media-links">-->
-<!--          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">-->
-<!--          <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </footer>-->
-
-
-<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"-->
-<!--    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"-->
-<!--    crossorigin="anonymous"></script>-->
-<!--</body>-->
-
-
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -501,6 +245,10 @@
             margin-bottom: 3rem;
         }
 
+        .products-grid > div {
+            display: contents;
+        }
+
         .product-card {
             background: #fefdfb;
             border-radius: 0;
@@ -596,6 +344,10 @@
             gap: 2rem;
         }
 
+        .categories-grid > div {
+            display: contents;
+        }
+
         .category-card {
             background: #fefdfb;
             border-radius: 0;
@@ -667,6 +419,13 @@
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .products-grid,
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -728,6 +487,7 @@
         <ul class="nav-links">
             <li><a href="/" class="nav-link">Главная</a></li>
             <li><a href="/product" class="nav-link">Магазин</a></li>
+            <li><a href="/about" class="nav-link">О нас </a></li>
         </ul>
     </div>
 </nav>
