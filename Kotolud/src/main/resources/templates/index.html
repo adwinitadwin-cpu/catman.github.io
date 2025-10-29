@@ -254,7 +254,6 @@
 
 <!--</html>-->
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -497,7 +496,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2.5rem;
             margin-bottom: 3rem;
         }
@@ -593,7 +592,7 @@
 
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
 
@@ -729,7 +728,6 @@
         <ul class="nav-links">
             <li><a href="/" class="nav-link">Главная</a></li>
             <li><a href="/product" class="nav-link">Магазин</a></li>
-            <li><a href="/about" class="nav-link">О Нас</a></li>
         </ul>
     </div>
 </nav>
@@ -754,26 +752,16 @@
         <div th:if="${carusel != null and carusel.size() > 0}">
             <div th:each="product : ${carusel}" class="product-card">
                 <div class="product-image">
-                    <!-- Обёрнули изображение в ссылку на товар -->
-                    <a th:href="@{/product/{id}(id=${product.id})}">
-                        <img th:if="${product.imageUrl != null and product.imageUrl != ''}"
-                             th:src="${product.imageUrl}"
-                             th:alt="${product.name}"
-                             loading="lazy" />
-                        <span th:unless="${product.imageUrl != null and product.imageUrl != ''}">📦</span>
-                    </a>
+                    <img th:if="${product.imageUrl != null and product.imageUrl != ''}"
+                         th:src="${product.imageUrl}"
+                         th:alt="${product.name}"
+                         loading="lazy" />
+                    <span th:unless="${product.imageUrl != null and product.imageUrl != ''}">📦</span>
                 </div>
                 <div class="product-info">
-                    <!-- Название товара также ссылается на товар -->
-                    <a th:href="@{/product/{id}(id=${product.id})}" style="text-decoration: none; color: inherit;">
-                        <div class="product-name" th:text="${product.name}"></div>
-                    </a>
-
+                    <div class="product-name" th:text="${product.name}"></div>
                     <div class="product-description" th:text="${product.description}"></div>
-
-                    <a th:href="@{/product/{id}(id=${product.id})}" class="product-link">
-                        Подробнее
-                    </a>
+                    <a th:href="${product.urlProduct}" class="product-link">Подробнее</a>
                 </div>
             </div>
         </div>

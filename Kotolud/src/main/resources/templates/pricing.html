@@ -1,324 +1,569 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/mycss.css">
-    <title>КоТоЛюД</title>
+    <title>КоТоЛюД - Премиальный магазин для кошек</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #3d3d3d;
+            line-height: 1.8;
+            background-color: #fefdfb;
+            letter-spacing: 0.3px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #6b6b6b;
+            font-weight: 300;
+            letter-spacing: 0.2px;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        nav {
+            background-color: rgba(254, 253, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(61, 61, 61, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.2rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3d3d3d;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #3d3d3d;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #3d3d3d;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        /* ===== HERO СЕКЦИЯ ===== */
+        .hero {
+            padding: 5rem 3rem;
+            background: linear-gradient(135deg, #fefdfb 0%, #faf8f3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(220, 200, 180, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #3d3d3d;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #6b6b6b;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 90%;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            padding: 1rem 2.5rem;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #3d3d3d;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: #6b6b6b;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .hero-button:hover::before {
+            left: 0;
+        }
+
+        .hero-button:hover {
+            border-color: #6b6b6b;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            box-shadow: 0 40px 80px rgba(61, 61, 61, 0.12);
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-image {
+                height: 350px;
+                font-size: 8rem;
+            }
+        }
+
+        /* ===== СЕКЦИЯ ТОВАРОВ ===== */
+        .section {
+            padding: 6rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            color: #3d3d3d;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background-color: #3d3d3d;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .products-grid > div {
+            display: contents;
+        }
+
+        .product-card {
+            background: #fefdfb;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(61, 61, 61, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid rgba(61, 61, 61, 0.06);
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 48px rgba(61, 61, 61, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #3d3d3d;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: #6b6b6b;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-weight: 300;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-link {
+            display: inline-block;
+            color: #3d3d3d;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        .product-link:hover::after {
+            margin-left: 0.8rem;
+        }
+
+        /* ===== СЕКЦИЯ КАТЕГОРИЙ ===== */
+        .categories-section {
+            background: linear-gradient(180deg, #fefdfb 0%, #faf8f3 100%);
+            border-top: 1px solid rgba(61, 61, 61, 0.08);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .categories-grid > div {
+            display: contents;
+        }
+
+        .category-card {
+            background: #fefdfb;
+            border-radius: 0;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(61, 61, 61, 0.06);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(61, 61, 61, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(61, 61, 61, 0.02) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(61, 61, 61, 0.12);
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #3d3d3d;
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            font-size: 0.95rem;
+            color: #6b6b6b;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #3d3d3d;
+            color: #fefdfb;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(254, 253, 251, 0.1);
+        }
+
+        footer p {
+            color: #ccc;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .products-grid,
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid,
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                height: 300px;
+                font-size: 6rem;
+            }
+        }
+
+        /* ===== ПУСТОЕ СОСТОЯНИЕ ===== */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ede9e0 100%);
+            border-radius: 2px;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            color: #6b6b6b;
+        }
+    </style>
 </head>
-
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-orange">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/"><img src="source/images/images.webp" alt="..."></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">КоТоЛюД</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="pricing.html">Магазин</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="pricing.html">О нас</a>
-                        </li>
-                        <li class="nav-item">
-                            <img style="width: 35px; margin-inline: 1em;"
-                                src="source/files/photo_2025-10-12_14-22-17.jpg" alt="...">
-                            <a class="nav-link active" href="pricing.html"></a>
-                        </li>
-                        <li class="nav-item">
-                            <img style="width: 25px; margin-inline: 1em;"
-                                src="source/files/photo_2025-10-12_14-22-40.jpg" alt="...">
-                            <a class="nav-link active" href="pricing.html"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+<!-- ===== НАВИГАЦИЯ ===== -->
+<nav>
+    <div class="nav-container">
+        <a href="/" class="logo">КоТоЛюД</a>
+        <ul class="nav-links">
+            <li><a href="/" class="nav-link">Главная</a></li>
+            <li><a href="/product" class="nav-link">Магазин</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <section>
-        <div class=".container-fluid mt-4">
-            <div class="row">
-                <div class="col-lg-1">
-                </div>
-
-
-                <div class="col-lg-8 col-md-12">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (12).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (11).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (10).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (8).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (7).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (2).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (6).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (5).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mt-4">
-                            <div class="card">
-                                <a href="#">
-                                    <img src="source/images/shopping (4).webp" class="card-img-top" alt="laptop">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="#"></a></h5>
-                                    <p class="card-text"><a href="#">
-                                            Some quick example text to build on the card title and make up
-                                            the bulk
-                                            of the card’s content.
-                                        </a></p>
-                                    <a href="#" class="btn btn-primary">Купить</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-lg12 col-md-12 text-center mt-4">
-                        <p>Мы можем вам помочь?</p>
-                    </div>
-                    <div class="col-lg12 col-md-12 text-center">
-                        <img class="call-anim" style="width: 40px; " src="source/files/photo_2025-10-12_14-22-49.jpg"
-                            alt="...">
-
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-12">
-                    <div class="row px-2">
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Найпопулярніший товар - корм та ласощі для котів. Для котів правильно збалансоване
-                                харчування дуже важливе, щоб зберегти здоров'я та активність, для довгого повноцінного
-                                життя. У магазині представлені найкращі товари: корми та ласощі преміум та
-                                суперпреміум-класу, що не містять хімічних добавок, ароматизаторів, підсилювачів смаку
-                                та барвників. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>До складу корму входить натуральне м'ясо, риба, риб'ячий і курячий жир, злаки та рослинні
-                                добавки, що збагачують раціон вихованця вітамінами. У різних лінійках корму для котів ви
-                                побачите у складі яблука, ягоди, моркву, трави, гарбуз, овес та інші вітамінні добавки.
-                                <a href="#">Узнать больше>>></a>
-                            </p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Представлені спеціальні лінійки кормів для кошенят, молодих та зрілих котів, для тварин у
-                                віці. Окремо потрібно виділити такий важливий товар для котів, як лікувальні корми. <a
-                                    href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Широкий вибір ветеринарних товарів для тварин різного віку дозволить з мінімальними
-                                зусиллями попередити хворобу або вилікувати кота. Перед покупкою обов'язково
-                                проконсультуйтеся із ветлікарем. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Вибір туалету та гігієнічного наповнювача – справа серйозна. Кіт може виявитися
-                                вибагливим як у виборі лотка, так і наповнювача. У нас ви знайдете десятки товарів:
-                                відкритих та закритих лотків, туалетів із сіткою різних розмірів, а також деревний,
-                                бентонітовий та силікогелеві наповнювачі. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Улюбленцю обов'язково потрібно відпочивати, відновлювати сили, для цього ми пропонуємо
-                                різноманітні лежанки та будиночки для котів. Ці товари в MasterZoo відрізняються високою
-                                якістю, великим вибором і широким спектром цін. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Приладдя для гігієни – товар, потрібний для котів всіх порід. Окрім звичних шампунів,
-                                гребінців, когтерезів, пуходерок тут ви знайдете специфічні товари. Вони дозволять
-                                привчити кота справляти природні потреби в бажаних місцях, не дряпати меблі та стіни,
-                                дозволять швидше привчити тварину ходити на лоток. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Вихованцям необхідно заточувати пазурі – це їхня природна потреба. Якщо не подбати
-                                заздалегідь і не купити для кота дряпку, подряпаними можуть виявитися диван, крісло,
-                                двері, шпалери та інші предмети. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Дряпки з сизалевим і джутовим волокном ідеально підходять для сточування кігтів, врятують
-                                предмети меблів, а також можуть стати цікавою іграшкою. Найпростіші гдряпки забезпечені
-                                помпоном або іграшкою на стовпчику, а масштабні ігрові комплекси складаються з кількох
-                                ярусів, майданчиків, гамаків та укриттів. Вибрати серед товарів найкращу дряпку для
-                                свого кота буде легко. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Серед запропонованих товарів зверніть увагу на сумки-переноски. Вони будуть необхідні при
-                                поході до ветеринара, поїздки у громадському транспорті, під час подорожі та переїзду на
-                                дачу. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Цікаві товари для котів – одяг. Виявляється, кіт з короткою вовною або безшерстий може
-                                бути не в дусі, якщо замерз. Затишний светр або жилет із м'якого плюшу або трикотажу для
-                                кота допоможе улюбленцю зігрітися. <a href="#">Узнать больше>>></a></p>
-                        </div>
-                        <div class="col-lg-12 sidebar my-4">
-                            <p>Окремо варто згадати про такий товар як миска та поїлка. Миски повинні бути стійкими,
-                                міцними, без сторонніх запахів та з безпечних матеріалів. Саме такий товар пропонує
-                                "MasterZoo". Ви зможете вибрати ємність будь-якого об'єму та форми для води та корму.
-                                Товар виготовлений тільки із безпечних, легких у догляді матеріалів. <a href="#">Learn
-            Узнать больше>>></a></p>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-            </div>
-
-
+<!-- ===== HERO СЕКЦИЯ ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Премиальный мир для вашей кошки</h1>
+            <p>Элегантная коллекция товаров, подобранная с заботой о благополучии вашего питомца. От питания до аксессуаров — всё для идеального образа жизни вашей кошки.</p>
+            <a href="/product" class="hero-button">Откройте коллекцию</a>
         </div>
-    </section>
+        <div class="hero-image">😺</div>
+    </div>
+</section>
 
-    <footer class="mt-4">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 footer-text text-center">
-                    <p>All Rights Reserved 2025</p>
+<!-- ===== ПОСЛЕДНИЕ ТОВАРЫ ===== -->
+<section class="section">
+    <h2 class="section-title">Избранные товары</h2>
+    <div class="products-grid">
+        <!-- Товары из carusel -->
+        <div th:if="${carusel != null and carusel.size() > 0}">
+            <div th:each="product : ${carusel}" class="product-card">
+                <div class="product-image">
+                    <img th:if="${product.imageUrl != null and product.imageUrl != ''}"
+                         th:src="${product.imageUrl}"
+                         th:alt="${product.name}"
+                         loading="lazy" />
+                    <span th:unless="${product.imageUrl != null and product.imageUrl != ''}">📦</span>
                 </div>
-                <div class="col-lg-4 col-md-12 footer-text text-center">
-                    <p>Contacts<br>Jpb<br>Our Team</p>
-                </div>
-                <div class="col-lg-4 col-md-12 media-links">
-                    <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-17.jpg"
-                        alt="...">
-                    <img style="width: 40px; margin-inline: 1em;" src="source/files/photo_2025-10-12_14-22-40.jpg"
-                        alt="...">
+                <div class="product-info">
+                    <div class="product-name" th:text="${product.name}"></div>
+                    <div class="product-description" th:text="${product.description}"></div>
+                    <a th:href="${product.urlProduct}" class="product-link">Подробнее</a>
                 </div>
             </div>
         </div>
-    </footer>
+
+        <!-- Fallback если товаров нет -->
+        <div th:if="${carusel == null or carusel.size() == 0}" class="empty-state">
+            <p>Коллекция пополняется. Следите за обновлениями</p>
+        </div>
+    </div>
+</section>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>© 2025 КоТоЛюД. Премиальные товары для вашего питомца. Создано с любовью к кошкам.</p>
+</footer>
+
+<script>
+    // Плавная прокрутка и микровзаимодействия
+    document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Ленивая загрузка изображений
+    if ('IntersectionObserver' in window) {
+        const images = document.querySelectorAll('img[th\\:src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.getAttribute('th:src');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        images.forEach(img => imageObserver.observe(img));
+    }
+</script>
 </body>
-
 </html>
